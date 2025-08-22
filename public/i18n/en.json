@@ -2,11 +2,11 @@
   "primeng": {
     "startsWith": "Starts with",
     "contains": "Contains",
-    "notContains": "Not contains",
+    "notContains": "Does not contain",
     "endsWith": "Ends with",
     "equals": "Equals",
-    "notEquals": "Not equals",
-    "noFilter": "No Filter",
+    "notEquals": "Does not equal",
+    "noFilter": "No filter",
     "lt": "Less than",
     "lte": "Less than or equal to",
     "gt": "Greater than",
@@ -17,14 +17,14 @@
     "after": "After",
     "dateIs": "Date is",
     "dateIsNot": "Date is not",
-    "dateBefore": "Date is before",
-    "dateAfter": "Date is after",
+    "dateBefore": "Date before",
+    "dateAfter": "Date after",
     "clear": "Clear",
     "apply": "Apply",
-    "matchAll": "Match All",
-    "matchAny": "Match Any",
-    "addRule": "Add Rule",
-    "removeRule": "Remove Rule",
+    "matchAll": "Match all",
+    "matchAny": "Match any",
+    "addRule": "Add rule",
+    "removeRule": "Remove rule",
     "accept": "Yes",
     "reject": "No",
     "choose": "Choose",
@@ -39,8 +39,16 @@
       "Friday",
       "Saturday"
     ],
-    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "dayNamesShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "dayNamesMin": ["S", "M", "T", "W", "T", "F", "S"],
     "monthNames": [
       "January",
       "February",
@@ -70,7 +78,7 @@
       "Dec"
     ],
     "today": "Today",
-    "weekHeader": "Wk",
+    "weekHeader": "Week",
     "firstDayOfWeek": 0
   },
   "lang": {
@@ -84,57 +92,69 @@
         "home": "Home",
         "about": "About Us",
         "careers": "Careers",
-        "contact": "Contact Us"
+        "contact": "Contact"
       },
-        "careers": {
+      "careers": {
         "all": "All Companies",
         "companyA": "Company A",
         "companyB": "Company B"
       },
       "footer": {
-        "description": "A governmental institution responsible for managing and developing the oil and gas sector in Syria.",
+        "description": "A governmental institution managing and developing the oil and gas sector in Syria.",
         "quickLinks": "Quick Links",
-        "contactUs": "Get in Touch",
+        "contactUs": "Contact Us",
         "email": "Email",
         "phone": "Phone",
         "address": "Damascus - Syria",
         "country": "Syrian Arab Republic"
       }
-    },
-    "features": {
-  "home": {
-    "hero": {
-      "buttons": {
-        "learnMore": "Learn More",
-        "contactUs": "Contact Us"
-      },
-      "tabs": {
-        "1": "Vision",
-        "2": "Mission",
-        "3": "Projects",
-        "4": "Contact"
-      },
-      "slides": {
-        "vision": {
-          "title": "Our Vision",
-          "description": "Achieving sustainability in the oil and gas sector to serve the future of Syria."
+    }
+  },
+  "features": {
+    "home": {
+      "hero": {
+        "buttons": {
+          "learnMore": "Learn More",
+          "contactUs": "Contact Us"
         },
-        "mission": {
-          "title": "Our Mission",
-          "description": "Developing the oil infrastructure using the latest technologies."
+        "tabs": {
+          "1": "Vision",
+          "2": "Mission",
+          "3": "Projects",
+          "4": "Contact"
         },
-        "projects": {
-          "title": "Our Projects",
-          "description": "Implementing strategic projects to increase production and improve quality."
-        },
-        "contact": {
-          "title": "Contact Us",
-          "description": "Our team is ready to answer your inquiries."
+        "slides": {
+          "vision": {
+            "title": "Our Vision",
+            "description": "Achieving sustainability in the oil and gas sector to serve Syria’s future."
+          },
+          "mission": {
+            "title": "Our Mission",
+            "description": "Developing oil infrastructure using the latest technologies."
+          },
+          "projects": {
+            "title": "Our Projects",
+            "description": "Implementing strategic projects to increase production and improve quality."
+          },
+          "contact": {
+            "title": "Get in Touch",
+            "description": "Our team is ready to answer your inquiries."
+          }
         }
       }
+    },
+    "careers": {
+      "title": "Build Your Future With Us",
+      "subtitle": "Join our team and help shape a future of innovation and success.",
+      "cta": "Browse Jobs",
+      "jobsTitle": "Available Jobs",
+      "filterTitle": "Job Filter",
+      "searchPlaceholder": "Search by keyword...",
+      "allCompanies": "All Companies",
+      "allCategories": "All Categories",
+      "allLocations": "All Locations",
+      "applyNow": "Apply Now",
+      "noJobsFound": "No jobs found matching your criteria."
     }
-  }
-}
-
   }
 }
