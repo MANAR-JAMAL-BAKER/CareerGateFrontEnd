@@ -14,10 +14,17 @@
     <ng-template let-slide let-i="index" pTemplate="item">
       <div
         class="relative flex flex-col justify-center text-center min-h-[95vh] max-h-[100vh]  w-full bg-cover bg-center"
-        [style.backgroundImage]="'url(' + slide.image + ')'"
+        
       >
-<div class="absolute inset-0" [ngClass]="gradientClass"></div>
-
+<div class="absolute inset-0 z-10" [ngClass]="gradientClass"></div>
+<div class="absolute inset-0">
+  <img 
+    [src]="slide.image" 
+    alt="hero image" 
+    class="w-full h-full object-cover" 
+    loading="lazy"
+  />
+  </div>
       
        <div
   class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 container w-4/5  rounded-lg overflow-hidden z-20 "
