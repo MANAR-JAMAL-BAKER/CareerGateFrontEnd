@@ -1,77 +1,60 @@
-<section class="relative w-screen min-h-[95vh] max-h-[100vh] flex flex-col">
-  <p-carousel
-    [value]="slides"
-    [circular]="true"
-    [autoplayInterval]="5000"
-    [numVisible]="1"
-    [numScroll]="1"
-    indicatorsContentClass="hidden!"
-    [showNavigators]="false"
-    [page]="activeIndex"
-    (onPage)="onSlideChange($event)"
-    class="w-full h-full"
-  >
-    <ng-template let-slide let-i="index" pTemplate="item">
-      <div
-        class="relative flex flex-col justify-center text-center min-h-[95vh] max-h-[100vh]  w-full bg-cover bg-center"
-        
-      >
-<div class="absolute inset-0 z-10" [ngClass]="gradientClass"></div>
-<div class="absolute inset-0">
-  <img 
-    [src]="slide.image" 
-    alt="hero image" 
-    class="w-full h-full object-cover" 
-    loading="lazy"
-  />
-  </div>
-      
-       <div
-  class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 container w-4/5  rounded-lg overflow-hidden z-20 "
->
-  <div
-    *ngFor="let s of slides; let j = index"
-    (click)="setSlide(j)"
-    class="relative flex-1 text-center cursor-pointer py-3 text-sm font-medium transition-colors"
-    [ngClass]="{
-      'text-accent': activeIndex === j,
-      'text-neutral-300': activeIndex !== j
-    }"
-  >
-    {{ 'Tab ' + (j + 1) }}
+<section class="relative w-screen min-h-[95vh] max-h-[100vh] overflow-hidden">
+  <!-- Slides -->
+  <div *ngFor="let slide of slides; let i = index"
+       class="absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out"
+       [ngClass]="{ 'opacity-100 z-20': activeIndex === i, 'opacity-0 z-0': activeIndex !== i }">
+    
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 z-10" [ngClass]="gradientClass"></div>
+    
+    <!-- Background image -->
+    <img [src]="slide.image" alt="hero image"
+         class="absolute inset-0 w-full h-full object-cover"
+         loading="lazy" />
+    
+    <!-- Slide content -->
+<!-- Slide content -->
+<div class="absolute inset-0 flex items-center z-20">
+  <div class="container mx-auto px-4 md:px-6 lg:px-8">
+    <div class="max-w-3xl flex flex-col items-center text-center md:items-start md:text-left">
+      <h1 class="text-3xl md:text-5xl font-bold mb-6 text-accent">
+        {{ slide.title | translate }}
+      </h1>
 
-    <div class="absolute bottom-0 left-0 h-[5px] w-full bg-gray-500/70">
-      <div
-        class="h-full bg-accent transition-all duration-[5000ms] ease-linear"
-        [style.width.%]="activeIndex === j ? progress : 0"
-      ></div>
+      <p class="text-neutral-200 mb-8 text-base md:text-lg">
+        {{ slide.description | translate }}
+      </p>
+
+      <div class="flex flex-row gap-4 mb-8 w-full sm:w-auto justify-center md:justify-start">
+        <button
+          class="bg-accent text-primary-dark px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-accent-light">
+          {{ 'features.home.hero.buttons.learnMore' | translate }}
+        </button>
+        <button
+          class="border border-accent text-accent px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-primary-light hover:text-neutral-50">
+          {{ 'features.home.hero.buttons.contactUs' | translate }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
-        <!-- Slide content -->
-        <div class="relative z-10 max-w-3xl px-6 mt-20">
-          <h1 class="text-3xl md:text-5xl font-bold mb-6 text-accent">
-            {{ slide.title | translate }}
-          </h1>
-          <p class="text-neutral-200 mb-8 text-base md:text-lg">
-            {{ slide.description | translate }}
-          </p>
+  </div>
 
-          <div class="flex gap-4 justify-center mb-8">
-<button
-  class="bg-accent text-primary-dark cursor-pointer px-6 py-2 rounded-lg font-medium transition-colors duration-300 ease-in-out hover:!bg-accent-light"
->
-  {{ 'features.home.hero.buttons.learnMore' | translate }}
-</button>
+  <!-- Indicators -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 container w-4/5 rounded-lg overflow-hidden z-30">
+    <div *ngFor="let s of slides; let j = index"
+         (click)="setSlide(j)"
+         class="relative flex-1 text-center cursor-pointer py-3 text-sm font-medium transition-colors"
+         [ngClass]="{
+           'text-accent': activeIndex === j,
+           'text-neutral-300': activeIndex !== j
+         }">
+      {{ 'Tab ' + (j + 1) }}
 
-<button
-  class="border cursor-pointer border-accent text-accent px-6 py-2 rounded-lg font-medium transition-colors duration-300 ease-in-out hover:!bg-primary-light hover:!text-neutral-50"
->
-  {{ 'features.home.hero.buttons.contactUs' | translate }}
-</button>
-          </div>
-        </div>
+      <div class="absolute bottom-0 left-0 h-[5px] w-full bg-gray-500/70">
+        <div class="h-full bg-accent transition-all ease-linear"
+             [style.width.%]="activeIndex === j ? progress : 0"></div>
       </div>
-    </ng-template>
-  </p-carousel>
+    </div>
+  </div>
 </section>

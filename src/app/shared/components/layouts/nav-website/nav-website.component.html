@@ -110,7 +110,7 @@
     </ul>
 
     <!-- Right section -->
-    <div class="flex items-center gap-4 flex-shrink-0">
+    <div class="flex items-center gap-2 lg:gap-4 flex-shrink-0">
       <!-- Language button -->
       <button
         (click)="languageService.toggleLang()"
@@ -125,7 +125,7 @@
           [alt]="languageService.currentLang === 'ar' ? 'العربية' : 'English'"
           class="h-6 w-6 rounded-full shadow"
         />
-        <span class="font-medium">
+        <span class="font-medium hidden md:d-inline">
           {{
             languageService.currentLang === "ar"
               ? ("lang.ar" | translate)

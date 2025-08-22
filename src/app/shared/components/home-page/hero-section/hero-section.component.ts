@@ -1,34 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { ButtonModule } from 'primeng/button';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselModule, CarouselPageEvent } from 'primeng/carousel';
+import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../../../../core/services/language.service';
 
 interface HeroSlide {
   title: string;
   description: string;
-  image?: string;
+  image: string;
 }
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [TranslateModule, CarouselModule, ButtonModule, CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrls: ['./hero-section.component.scss']
 })
-export class HeroSectionComponent implements OnInit {
+export class HeroSectionComponent implements OnInit, OnDestroy {
   activeIndex = 0;
   progress = 0;
-  interval: any;
+  intervalId: any;
   autoplayInterval = 5000;
-
-  get gradientClass(): string {
-    return this.languageService.currentLang === 'ar'
-      ? 'bg-gradient-to-l from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10'
-      : 'bg-gradient-to-r from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10';
-  }
+  step = 100 / (5000 / 100); // update progress every 100ms
 
   slides: HeroSlide[] = [
     {
@@ -55,35 +48,43 @@ export class HeroSectionComponent implements OnInit {
 
   constructor(public languageService: LanguageService) {}
 
-  ngOnInit() {
-    this.startProgress();
+  get gradientClass(): string {
+    return this.languageService.currentLang === 'ar'
+      ? 'bg-gradient-to-l from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10'
+      : 'bg-gradient-to-r from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10';
   }
 
-  onSlideChange(event: CarouselPageEvent) {
-    this.activeIndex = event.page ?? 0;
-    this.resetProgress();
+  ngOnInit(): void {
+    this.startAutoplay();
   }
 
-  setSlide(index: number) {
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
+
+  setSlide(index: number): void {
     this.activeIndex = index;
-    this.resetProgress();
+    this.resetAutoplay();
   }
 
-  resetProgress() {
-    clearInterval(this.interval);
-    this.progress = 0;
-    this.startProgress();
-  }
-
-  startProgress() {
-    const step = 1000 / (this.autoplayInterval / 1000); 
-    this.interval = setInterval(() => {
+  private startAutoplay(): void {
+    this.intervalId = setInterval(() => {
       if (this.progress < 100) {
-        this.progress += step;
+        this.progress += this.step;
       } else {
-        this.progress = 100;
-        clearInterval(this.interval);
+        this.nextSlide();
       }
     }, 100);
+  }
+
+  private resetAutoplay(): void {
+    clearInterval(this.intervalId);
+    this.progress = 0;
+    this.startAutoplay();
+  }
+
+  private nextSlide(): void {
+    this.activeIndex = (this.activeIndex + 1) % this.slides.length;
+    this.progress = 0;
   }
 }
