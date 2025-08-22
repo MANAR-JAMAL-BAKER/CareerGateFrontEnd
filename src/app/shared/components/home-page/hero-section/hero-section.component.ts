@@ -34,22 +34,22 @@ export class HeroSectionComponent implements OnInit {
     {
       title: 'features.home.hero.slides.vision.title',
       description: 'features.home.hero.slides.vision.description',
-      image: 'images/oil-eng.jpg',
+      image: 'images/oil-eng.webp',
     },
     {
       title: 'features.home.hero.slides.mission.title',
       description: 'features.home.hero.slides.mission.description',
-      image: 'images/oil-refinery.jpg',
+      image: 'images/oil-refinery.webp',
     },
     {
       title: 'features.home.hero.slides.projects.title',
       description: 'features.home.hero.slides.projects.description',
-      image: 'images/oil-pipelines.jpg',
+      image: 'images/oil-pipelines.webp',
     },
     {
       title: 'features.home.hero.slides.contact.title',
       description: 'features.home.hero.slides.contact.description',
-      image: 'images/oil-2.jpg',
+      image: 'images/oil-2.webp',
     }
   ];
 
