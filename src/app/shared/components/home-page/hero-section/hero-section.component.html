@@ -1,43 +1,47 @@
 <section class="relative w-screen min-h-[95vh] max-h-[100vh] overflow-hidden">
   <!-- Slides -->
   <div *ngFor="let slide of slides; let i = index"
-       class="absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out"
+       class="absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out slide"
        [ngClass]="{ 'opacity-100 z-20': activeIndex === i, 'opacity-0 z-0': activeIndex !== i }">
     
-    <!-- Gradient overlay -->
     <div class="absolute inset-0 z-10" [ngClass]="gradientClass"></div>
     
-    <!-- Background image -->
-    <img [src]="slide.image" alt="hero image"
-         class="absolute inset-0 w-full h-full object-cover"
-        />
-    
+<img *ngIf="i === 0"
+     [src]="slide.image"
+     alt="hero image"
+     class="absolute inset-0 w-full h-full object-cover" />
+
+<img *ngIf="i !== 0"
+     [appLazyImg]="slide.image"
+     [placeholder]="slide.placeholder"
+     alt="hero image"
+     class="absolute inset-0 w-full h-full object-cover lazy-img" />
+
     <!-- Slide content -->
-<!-- Slide content -->
-<div class="absolute inset-0 flex items-center z-20">
-  <div class="container mx-auto px-4 md:px-6 lg:px-8">
-    <div class="max-w-3xl flex flex-col items-center text-center md:items-start md:text-left">
-      <h1 class="text-3xl md:text-5xl font-bold mb-6 text-accent">
-        {{ slide.title | translate }}
-      </h1>
+    <div class="absolute inset-0 flex items-center z-20">
+      <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <div class="max-w-3xl flex flex-col items-center text-center md:items-start md:text-left">
+          <h1 class="text-3xl md:text-5xl font-bold mb-6 text-accent">
+            {{ slide.title | translate }}
+          </h1>
 
-      <p class="text-neutral-200 mb-8 text-base md:text-lg">
-        {{ slide.description | translate }}
-      </p>
+          <p class="text-neutral-200 mb-8 text-base md:text-lg">
+            {{ slide.description | translate }}
+          </p>
 
-      <div class="flex flex-row gap-4 mb-8 w-full sm:w-auto justify-center md:justify-start">
-        <button
-          class="bg-accent text-primary-dark px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-accent-light">
-          {{ 'features.home.hero.buttons.learnMore' | translate }}
-        </button>
-        <button
-          class="border border-accent text-accent px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-primary-light hover:text-neutral-50">
-          {{ 'features.home.hero.buttons.contactUs' | translate }}
-        </button>
+          <div class="flex flex-row gap-4 mb-8 w-full sm:w-auto justify-center md:justify-start">
+            <button
+              class="bg-accent text-primary-dark px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-accent-light">
+              {{ 'features.home.hero.buttons.learnMore' | translate }}
+            </button>
+            <button
+              class="border border-accent text-accent px-6 py-2 rounded-lg font-medium transition-colors duration-300 hover:bg-primary-light hover:text-neutral-50">
+              {{ 'features.home.hero.buttons.contactUs' | translate }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
   </div>
 
   <!-- Indicators -->
