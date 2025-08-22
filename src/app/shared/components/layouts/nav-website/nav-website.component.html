@@ -1,0 +1,256 @@
+<nav
+  class="bg-black/30 backdrop-blur-xl  absolute top-10   left-1/2 -translate-x-1/2 mt-4 w-full
+         lg:rounded-2xl  lg:top-10 lg:max-w-4xl xl:max-w-6xl xxl:max-w-7xl lg:mx-auto z-50"
+>
+  <div class="container mx-auto px-6 py-4 flex gap-2 justify-between items-center">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-3">
+      <img [src]="languageService.currentLang=='ar'?'logos/logo-ar.svg':'logos/logo-en.svg'" alt="شعار" class="h-12 w-auto" />
+      <!-- <span class="text-accent text-2xl font-bold hidden sm:block">
+        {{ "layout.mainLayout.logoText" | translate }}
+      </span> -->
+    </a>
+
+    <!-- Desktop menu -->
+    <ul class="hidden lg:flex items-center gap-8 text-neutral-100 font-medium">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.home" | translate }}
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.about" | translate }}
+        </a>
+      </li>
+
+      <!-- Careers Dropdown -->
+      <li
+        class="relative group"
+        routerLinkActive="text-accent font-semibold"
+        [routerLinkActiveOptions]="{ exact: false }"
+      >
+        <button class="flex items-center gap-1 hover:text-accent transition">
+          {{ "layout.mainLayout.nav.careers" | translate }}
+          <svg
+            class="w-4 h-4 mt-1 transition-transform group-hover:rotate-180"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <ul
+          class="absolute left-0 mt-2 w-52 bg-white text-primary rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition duration-200 origin-top z-50"
+        >
+          <li>
+            <a
+              routerLink="/careers"
+              [queryParams]="{ company: 'all' }"
+              routerLinkActive="bg-accent text-white font-semibold"
+              [routerLinkActiveOptions]="{ exact: false }"
+              class="block px-4 py-2 hover:bg-accent hover:text-white text-base rounded-t-lg transition"
+            >
+              {{ "layout.mainLayout.careers.all" | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/careers"
+              [queryParams]="{ company: 'companyA' }"
+              routerLinkActive="bg-accent text-white font-semibold"
+              [routerLinkActiveOptions]="{ exact: false }"
+              class="block px-4 py-2 hover:bg-accent hover:text-white text-base transition"
+            >
+              {{ "layout.mainLayout.careers.companyA" | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/careers"
+              [queryParams]="{ company: 'companyB' }"
+              routerLinkActive="bg-accent text-white font-semibold"
+              [routerLinkActiveOptions]="{ exact: false }"
+              class="block px-4 py-2 hover:bg-accent hover:text-white text-base rounded-b-lg transition"
+            >
+              {{ "layout.mainLayout.careers.companyB" | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a
+          routerLink="/contact"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.contact" | translate }}
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right section -->
+    <div class="flex items-center gap-4">
+      <!-- Language button -->
+      <button
+        (click)="languageService.toggleLang()"
+        class="flex items-center cursor-pointer gap-2 px-3 py-1 text-lg rounded-lg text-primary bg-white hover:bg-white/20 hover:text-white transition"
+      >
+        <img
+          [src]="
+            languageService.currentLang === 'ar'
+              ? 'icons/sy-flag.svg'
+              : 'icons/uk-flag.svg'
+          "
+          [alt]="languageService.currentLang === 'ar' ? 'العربية' : 'English'"
+          class="h-6 w-6 rounded-full shadow"
+        />
+        <span class="font-medium">
+          {{
+            languageService.currentLang === "ar"
+              ? ("lang.ar" | translate)
+              : ("lang.en" | translate)
+          }}
+        </span>
+      </button>
+
+      <!-- Mobile menu button -->
+      <button
+        (click)="toggleMenu()"
+        class="lg:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-accent"
+      >
+        <svg
+          class="w-7 h-7 text-neutral-100"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            *ngIf="!mobileMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+          <path
+            *ngIf="mobileMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div *ngIf="mobileMenuOpen" class="lg:hidden bg-primary border-t border-neutral-700">
+    <ul class="flex flex-col space-y-3 px-6 py-4 text-neutral-100 font-medium">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggleMenu()"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.home" | translate }}
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggleMenu()"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.about" | translate }}
+        </a>
+      </li>
+
+      <!-- Careers dropdown for mobile -->
+      <li
+        routerLinkActive="text-accent font-semibold"
+        [routerLinkActiveOptions]="{ exact: false }"
+      >
+        <details class="group">
+          <summary class="cursor-pointer hover:text-accent transition">
+            {{ "layout.mainLayout.nav.careers" | translate }}
+          </summary>
+          <ul class="ml-4 mt-2 space-y-1 text-base">
+            <li>
+              <a
+                routerLink="/careers"
+                [queryParams]="{ company: 'all' }"
+                routerLinkActive="text-accent font-semibold"
+                [routerLinkActiveOptions]="{ exact: false }"
+                (click)="toggleMenu()"
+                class="block hover:text-accent"
+              >
+                {{ "layout.mainLayout.careers.all" | translate }}
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/careers"
+                [queryParams]="{ company: 'companyA' }"
+                routerLinkActive="text-accent font-semibold"
+                [routerLinkActiveOptions]="{ exact: false }"
+                (click)="toggleMenu()"
+                class="block hover:text-accent"
+              >
+                {{ "layout.mainLayout.careers.companyA" | translate }}
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/careers"
+                [queryParams]="{ company: 'companyB' }"
+                routerLinkActive="text-accent font-semibold"
+                [routerLinkActiveOptions]="{ exact: false }"
+                (click)="toggleMenu()"
+                class="block hover:text-accent"
+              >
+                {{ "layout.mainLayout.careers.companyB" | translate }}
+              </a>
+            </li>
+          </ul>
+        </details>
+      </li>
+
+      <li>
+        <a
+          routerLink="/contact"
+          routerLinkActive="text-accent font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggleMenu()"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.contact" | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

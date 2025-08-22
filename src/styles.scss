@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+@use "./styles/colors";
+@use "./styles/fonts";
+@use "./styles/typography";
+@use "./styles/animations";
+// body{background-color: var(--color-accent);}

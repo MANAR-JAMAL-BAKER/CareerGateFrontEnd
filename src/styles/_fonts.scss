@@ -1,0 +1,19 @@
+@theme {
+  --default-font-family: "Amiri", Arial, sans-serif;
+  --font-ar: "Amiri", Arial, sans-serif;
+  --font-en: "Roboto", Arial, sans-serif;
+  // --font-logo-ar: "Rubik", Arial, sans-serif;
+  // --font-logo-en: "Raleway", Arial, sans-serif;
+  
+}
+
+html[dir="rtl"] {
+  --font-sans: var(--font-ar) !important;
+}
+
+html[dir="ltr"] {
+  --font-sans: var(--font-en) !important;
+}
+
+// body.rtl .logo { @apply font-logo-ar; }
+// body.ltr .logo { @apply font-logo-en; }
