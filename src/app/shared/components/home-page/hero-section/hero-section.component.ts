@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../../../../core/services/language.service';
@@ -14,14 +14,15 @@ interface HeroSlide {
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './hero-section.component.html',
-  styleUrls: ['./hero-section.component.scss']
+  styleUrls: ['./hero-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroSectionComponent implements OnInit, OnDestroy {
   activeIndex = 0;
   progress = 0;
-  intervalId: any;
+  timeoutId: any;
+  progressId: any;
   autoplayInterval = 5000;
-  step = 100 / (5000 / 100); // update progress every 100ms
 
   slides: HeroSlide[] = [
     {
@@ -59,26 +60,23 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalId);
+    this.clearTimers();
   }
 
   setSlide(index: number): void {
     this.activeIndex = index;
-    this.resetAutoplay();
+    this.restartAutoplay();
   }
 
   private startAutoplay(): void {
-    this.intervalId = setInterval(() => {
-      if (this.progress < 100) {
-        this.progress += this.step;
-      } else {
-        this.nextSlide();
-      }
-    }, 100);
+    this.startProgress();
+    this.timeoutId = setTimeout(() => {
+      this.nextSlide();
+    }, this.autoplayInterval);
   }
 
-  private resetAutoplay(): void {
-    clearInterval(this.intervalId);
+  private restartAutoplay(): void {
+    this.clearTimers();
     this.progress = 0;
     this.startAutoplay();
   }
@@ -86,5 +84,19 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
   private nextSlide(): void {
     this.activeIndex = (this.activeIndex + 1) % this.slides.length;
     this.progress = 0;
+    this.startAutoplay();
+  }
+
+  private startProgress(): void {
+    const stepTime = 100; 
+    const step = 100 / (this.autoplayInterval / stepTime);
+    this.progressId = setInterval(() => {
+      this.progress = Math.min(this.progress + step, 100);
+    }, stepTime);
+  }
+
+  private clearTimers(): void {
+    clearTimeout(this.timeoutId);
+    clearInterval(this.progressId);
   }
 }
