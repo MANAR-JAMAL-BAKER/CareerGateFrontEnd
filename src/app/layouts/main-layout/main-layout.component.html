@@ -4,69 +4,10 @@
   <app-nav-website></app-nav-website>
 
   <!-- Main content -->
-  <main class="flex-grow  mx-auto  ">
+  <main class="flex-grow mx-auto w-full">
     <router-outlet></router-outlet>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-primary text-neutral-300 mt-10">
-    <div class="container mx-auto px-6 py-8 grid md:grid-cols-3 gap-6">
-      <div>
-        <div>
-          <img src="logos/Emblem_of_Syria.svg" alt="Logo" class="h-14 mb-3" />
-          <span class="text-white text-lg font-bold logo hidden sm:block">
-            {{ "layout.mainLayout.logoText" | translate }}
-          </span>
-        </div>
-        <p class="text-sm">
-          {{ "layout.mainLayout.footer.description" | translate }}
-        </p>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-white mb-3">
-          {{ "layout.mainLayout.footer.quickLinks" | translate }}
-        </h3>
-        <ul class="space-y-1">
-          <li>
-            <a routerLink="/" class="hover:text-accent transition">{{
-              "layout.mainLayout.nav.home" | translate
-            }}</a>
-          </li>
-          <li>
-            <a routerLink="/about" class="hover:text-accent transition">{{
-              "layout.mainLayout.nav.about" | translate
-            }}</a>
-          </li>
-          <li>
-            <a routerLink="/careers" class="hover:text-accent transition">{{
-              "layout.mainLayout.nav.careers" | translate
-            }}</a>
-          </li>
-          <li>
-            <a routerLink="/contact" class="hover:text-accent transition">{{
-              "layout.mainLayout.nav.contact" | translate
-            }}</a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-white mb-3">
-          {{ "layout.mainLayout.footer.contactUs" | translate }}
-        </h3>
-        <p>
-          {{ "layout.mainLayout.footer.email" | translate }}: info@oil.gov.sy
-        </p>
-        <p>
-          {{ "layout.mainLayout.footer.phone" | translate }}: +963 11 1234567
-        </p>
-        <p>{{ "layout.mainLayout.footer.address" | translate }}</p>
-      </div>
-    </div>
-    <div
-      class="text-center py-4 border-t border-neutral-700 text-sm text-accent"
-    >
-      © {{ currentYear }} {{ "layout.mainLayout.logoText" | translate }} -
-      {{ "layout.mainLayout.footer.country" | translate }}
-    </div>
-  </footer>
+  <app-footer-website></app-footer-website>
 </div>

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
-// import { PrimeNG } from 'primeng/config';
+import { PrimeNG } from 'primeng/config';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -14,7 +14,7 @@ export class LanguageService {
 
   constructor(
     private translate: TranslateService,
-    // private config: PrimeNG,
+    private config: PrimeNG,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.initLanguage();
@@ -37,7 +37,7 @@ export class LanguageService {
         body.classList.add(lang === 'ar' ? 'rtl' : 'ltr');
 
         this.translate.get('primeng').subscribe((res) => {
-          // this.config.setTranslation(res);
+          this.config.setTranslation(res);
           this.rtlSubject.next(lang === 'ar');
           localStorage.setItem('lang', lang);
           resolve();

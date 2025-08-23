@@ -1,9 +1,12 @@
 {
+   "shared": {
+    "loadMore": "Load More",
+    "backToJobs": "Back to Jobs"
+  },
   "primeng": {
     "startsWith": "Starts with",
     "contains": "Contains",
     "notContains": "Does not contain",
-    "endsWith": "Ends with",
     "equals": "Equals",
     "notEquals": "Does not equal",
     "noFilter": "No filter",
@@ -39,15 +42,7 @@
       "Friday",
       "Saturday"
     ],
-    "dayNamesShort": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
+    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     "dayNamesMin": ["S", "M", "T", "W", "T", "F", "S"],
     "monthNames": [
       "January",
@@ -87,26 +82,40 @@
   },
   "layout": {
     "mainLayout": {
-      "logoText": "General Petroleum Administration",
-      "nav": {
-        "home": "Home",
-        "about": "About Us",
-        "careers": "Careers",
-        "contact": "Contact"
-      },
-      "careers": {
-        "all": "All Companies",
-        "companyA": "Company A",
-        "companyB": "Company B"
-      },
+       "logoText": "Syrian Oil Ministry",
       "footer": {
-        "description": "A governmental institution managing and developing the oil and gas sector in Syria.",
+        "description": "Providing reliable energy solutions and services across Syria.",
         "quickLinks": "Quick Links",
         "contactUs": "Contact Us",
         "email": "Email",
         "phone": "Phone",
-        "address": "Damascus - Syria",
-        "country": "Syrian Arab Republic"
+        "address": "Address",
+        "country": "Syria"
+      },
+      "nav": {
+        "home": "Home",
+        "news": "News",
+        "services": "Services",
+        "projects": "Our Projects",
+        "companies": "Companies",
+        "careers": "Careers",
+        "contact": "Contact Us"
+      },
+      "services": {
+        "laws": "Laws & Regulations",
+        "stations": "Fuel Stations Guide"
+      },
+      "companies": {
+        "oil": "Syrian Petroleum Company",
+        "gas": "Syrian Gas Company",
+        "homs": "Homs Refinery Company",
+        "banias": "Banias Refinery Company",
+        "fuel": "Fuel Company (Mahroukat)"
+      },
+      "jobs": {
+        "search": "Job Search",
+        "dashboard": "Dashboard",
+        "cv": "Build Your CV"
       }
     }
   },
@@ -154,7 +163,24 @@
       "allCategories": "All Categories",
       "allLocations": "All Locations",
       "applyNow": "Apply Now",
-      "noJobsFound": "No jobs found matching your criteria."
+      "noJobsFound": "No jobs found matching your criteria.",
+          "jobsAvailable": "Jobs currently available",
+      "clearAll": "Clear All",
+      "jobCategories": "Job Categories",
+      "jobTypes": "Job Types",
+      "companies": "Companies",
+      "clear": "Clear",
+      "sortJobs": "Sort Jobs",
+      "jobCode": "Job Code",
+      "posted": "Posted",
+      "jobDetails": "Job details",
+      "noJobs": "No jobs found",
+        "recentJobs": "Recent Jobs",
+      "featuredJobs": "Featured Jobs",
+      "responsibilities": "Responsibilities",
+      "qualifications": "Qualifications",
+      "skills": "Skills",
+      "gender": "Gender Requirement"
     }
   }
 }

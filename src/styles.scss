@@ -4,3 +4,75 @@
 @use "./styles/typography";
 @use "./styles/animations";
 // body{background-color: var(--color-accent);}
+button{
+    cursor: pointer;
+}
+p-select {
+  .p-select {
+    border: 1px solid var(--color-neutral-300);
+    border-radius: 0.75rem;
+    background: var(--color-neutral-50);
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      border-color: var(--color-primary-light);
+    }
+
+    &.p-focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px var(--color-primary-light);
+    }
+  }
+
+  .p-select-items {
+    background: var(--color-neutral-50);
+    border: 1px solid var(--color-neutral-200);
+
+    .p-select-item {
+      padding: 0.5rem 1rem;
+      color: var(--color-neutral-800);
+
+      &.p-highlight {
+        background: var(--color-primary-light);
+        color: white;
+      }
+
+      &:hover {
+        background: var(--color-neutral-100);
+      }
+    }
+  }
+}
+
+p-select {
+  .p-select-trigger-icon {
+    transition: transform 0.25s ease;
+  }
+
+  .p-select.p-select-open .p-select-trigger-icon {
+    transform: rotate(180deg);
+  }
+}
+
+:root {
+  --checkbox-active-bg: var(--color-primary);
+  --checkbox-active-border: var(--color-primary);
+  --checkbox-hover-border: var(--color-primary-light);
+}
+
+.p-checkbox {
+  .p-checkbox-box {
+    border-radius: 0.375rem; 
+    border: 2px solid var(--color-neutral-400);
+    transition: all 0.2s;
+  }
+
+  .p-checkbox-box.p-highlight {
+    background: var(--checkbox-active-bg);
+    border-color: var(--checkbox-active-border);
+  }
+
+  &:hover .p-checkbox-box {
+    border-color: var(--checkbox-hover-border);
+  }
+}

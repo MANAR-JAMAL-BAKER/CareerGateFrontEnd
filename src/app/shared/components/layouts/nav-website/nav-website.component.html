@@ -1,14 +1,16 @@
 <nav
-  class="bg-black/30 backdrop-blur-xl  absolute top-10   left-1/2 -translate-x-1/2 mt-4 w-full
-         lg:rounded-2xl  lg:top-10 lg:max-w-4xl xl:max-w-6xl xxl:max-w-7xl lg:mx-auto z-50"
+  class="bg-black/30 backdrop-blur-xl  absolute top-8   left-1/2 -translate-x-1/2  w-full
+         lg:rounded-2xl border border-white/20   lg:top-10 lg:max-w-4xl xl:max-w-6xl xxl:max-w-7xl lg:mx-auto z-50"
 >
   <div class="container mx-auto px-6 py-4 flex gap-2 justify-between items-center">
     <!-- Logo -->
+    <!-- [src]="languageService.currentLang=='ar'?'logos/logo-ar.svg':'logos/logo-en.svg'" -->
     <a routerLink="/" class="flex items-center gap-3">
-      <img [src]="languageService.currentLang=='ar'?'logos/logo-ar.svg':'logos/logo-en.svg'" alt="شعار" class="h-12 w-auto" />
-      <!-- <span class="text-accent text-2xl font-bold hidden sm:block">
-        {{ "layout.mainLayout.logoText" | translate }}
-      </span> -->
+      <img
+      src="logos/Emblem_of_Syria.svg"
+        alt="logo"
+        class="h-12 w-auto"
+      />
     </a>
 
     <!-- Desktop menu -->
@@ -23,23 +25,97 @@
           {{ "layout.mainLayout.nav.home" | translate }}
         </a>
       </li>
+
       <li>
         <a
-          routerLink="/about"
+          routerLink="/news"
           routerLinkActive="text-accent font-semibold"
-          [routerLinkActiveOptions]="{ exact: true }"
           class="hover:text-accent transition"
         >
-          {{ "layout.mainLayout.nav.about" | translate }}
+          {{ "layout.mainLayout.nav.news" | translate }}
         </a>
       </li>
 
-      <!-- Careers Dropdown -->
-      <li
-        class="relative group"
-        routerLinkActive="text-accent font-semibold"
-        [routerLinkActiveOptions]="{ exact: false }"
-      >
+      <li class="relative group">
+        <button class="flex items-center gap-1 hover:text-accent transition">
+          {{ "layout.mainLayout.nav.services" | translate }}
+          <svg
+            class="w-4 h-4 mt-1 transition-transform group-hover:rotate-180"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+    <ul
+  class="absolute mt-2 w-64 bg-white  text-primary rounded-md shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition duration-200 origin-top z-50"
+  [ngClass]="languageService.currentLang === 'ar' ? 'right-0' : 'left-0'"
+>
+          <li>
+            <a
+              routerLink="/services/laws"
+              class="block px-4 py-2 hover:bg-accent hover:text-white rounded-t-lg transition"
+            >
+              {{ "layout.mainLayout.services.laws" | translate }}
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/services/stations"
+              class="block px-4 py-2 hover:bg-accent hover:text-white rounded-b-lg transition"
+            >
+              {{ "layout.mainLayout.services.stations" | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a
+          routerLink="/projects"
+          routerLinkActive="text-accent font-semibold"
+          class="hover:text-accent transition"
+        >
+          {{ "layout.mainLayout.nav.projects" | translate }}
+        </a>
+      </li>
+
+      <li class="relative group">
+        <button class="flex items-center gap-1 hover:text-accent transition">
+          {{ "layout.mainLayout.nav.companies" | translate }}
+          <svg
+            class="w-4 h-4 mt-1 transition-transform group-hover:rotate-180"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      <ul
+  class="absolute mt-2 w-64 bg-white text-primary rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition duration-200 origin-top z-50"
+  [ngClass]="languageService.currentLang === 'ar' ? 'right-0' : 'left-0'"
+>
+          <li><a routerLink="/companies/oil" class="block px-4 py-2 hover:bg-accent hover:text-white rounded-t-lg transition">{{ "layout.mainLayout.companies.oil" | translate }}</a></li>
+          <li><a routerLink="/companies/gas" class="block px-4 py-2 hover:bg-accent hover:text-white transition">{{ "layout.mainLayout.companies.gas" | translate }}</a></li>
+          <li><a routerLink="/companies/homs-refinery" class="block px-4 py-2 hover:bg-accent hover:text-white transition">{{ "layout.mainLayout.companies.homs" | translate }}</a></li>
+          <li><a routerLink="/companies/banias-refinery" class="block px-4 py-2 hover:bg-accent hover:text-white transition">{{ "layout.mainLayout.companies.banias" | translate }}</a></li>
+          <li><a routerLink="/companies/fuel" class="block px-4 py-2 hover:bg-accent hover:text-white rounded-b-lg transition">{{ "layout.mainLayout.companies.fuel" | translate }}</a></li>
+        </ul>
+      </li>
+
+      <li class="relative group">
         <button class="flex items-center gap-1 hover:text-accent transition">
           {{ "layout.mainLayout.nav.careers" | translate }}
           <svg
@@ -56,44 +132,13 @@
             />
           </svg>
         </button>
-
-        <!-- Dropdown menu -->
-        <ul
-          class="absolute left-0 mt-2 w-52 bg-white text-primary rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition duration-200 origin-top z-50"
-        >
-          <li>
-            <a
-              routerLink="/careers"
-              [queryParams]="{ company: 'all' }"
-              routerLinkActive="bg-accent text-white font-semibold"
-              [routerLinkActiveOptions]="{ exact: false }"
-              class="block px-4 py-2 hover:bg-accent hover:text-white text-base rounded-t-lg transition"
-            >
-              {{ "layout.mainLayout.careers.all" | translate }}
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="/careers"
-              [queryParams]="{ company: 'companyA' }"
-              routerLinkActive="bg-accent text-white font-semibold"
-              [routerLinkActiveOptions]="{ exact: false }"
-              class="block px-4 py-2 hover:bg-accent hover:text-white text-base transition"
-            >
-              {{ "layout.mainLayout.careers.companyA" | translate }}
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="/careers"
-              [queryParams]="{ company: 'companyB' }"
-              routerLinkActive="bg-accent text-white font-semibold"
-              [routerLinkActiveOptions]="{ exact: false }"
-              class="block px-4 py-2 hover:bg-accent hover:text-white text-base rounded-b-lg transition"
-            >
-              {{ "layout.mainLayout.careers.companyB" | translate }}
-            </a>
-          </li>
+      <ul
+  class="absolute mt-2 w-64 bg-white text-primary rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition duration-200 origin-top z-50"
+  [ngClass]="languageService.currentLang === 'ar' ? 'right-0' : 'left-0'"
+>
+          <li><a routerLink="/careers" class="block px-4 py-2 hover:bg-accent hover:text-white rounded-t-lg transition">{{ "layout.mainLayout.jobs.search" | translate }}</a></li>
+          <li><a routerLink="/jobs/dashboard" class="block px-4 py-2 hover:bg-accent hover:text-white transition">{{ "layout.mainLayout.jobs.dashboard" | translate }}</a></li>
+          <li><a routerLink="/jobs/cv-builder" class="block px-4 py-2 hover:bg-accent hover:text-white rounded-b-lg transition">{{ "layout.mainLayout.jobs.cv" | translate }}</a></li>
         </ul>
       </li>
 
@@ -101,7 +146,6 @@
         <a
           routerLink="/contact"
           routerLinkActive="text-accent font-semibold"
-          [routerLinkActiveOptions]="{ exact: true }"
           class="hover:text-accent transition"
         >
           {{ "layout.mainLayout.nav.contact" | translate }}
@@ -167,90 +211,52 @@
   <!-- Mobile menu -->
   <div *ngIf="mobileMenuOpen" class="lg:hidden bg-primary border-t border-neutral-700">
     <ul class="flex flex-col space-y-3 px-6 py-4 text-neutral-100 font-medium">
-      <li>
-        <a
-          routerLink="/"
-          routerLinkActive="text-accent font-semibold"
-          [routerLinkActiveOptions]="{ exact: true }"
-          (click)="toggleMenu()"
-          class="hover:text-accent transition"
-        >
-          {{ "layout.mainLayout.nav.home" | translate }}
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/about"
-          routerLinkActive="text-accent font-semibold"
-          [routerLinkActiveOptions]="{ exact: true }"
-          (click)="toggleMenu()"
-          class="hover:text-accent transition"
-        >
-          {{ "layout.mainLayout.nav.about" | translate }}
-        </a>
-      </li>
+      <li><a routerLink="/" (click)="toggleMenu()" class="hover:text-accent transition">{{ "layout.mainLayout.nav.home" | translate }}</a></li>
+      <li><a routerLink="/news" (click)="toggleMenu()" class="hover:text-accent transition">{{ "layout.mainLayout.nav.news" | translate }}</a></li>
 
-      <!-- Careers dropdown for mobile -->
-      <li
-        routerLinkActive="text-accent font-semibold"
-        [routerLinkActiveOptions]="{ exact: false }"
-      >
+      <li>
         <details class="group">
           <summary class="cursor-pointer hover:text-accent transition">
-            {{ "layout.mainLayout.nav.careers" | translate }}
+            {{ "layout.mainLayout.nav.services" | translate }}
           </summary>
           <ul class="ml-4 mt-2 space-y-1 text-base">
-            <li>
-              <a
-                routerLink="/careers"
-                [queryParams]="{ company: 'all' }"
-                routerLinkActive="text-accent font-semibold"
-                [routerLinkActiveOptions]="{ exact: false }"
-                (click)="toggleMenu()"
-                class="block hover:text-accent"
-              >
-                {{ "layout.mainLayout.careers.all" | translate }}
-              </a>
-            </li>
-            <li>
-              <a
-                routerLink="/careers"
-                [queryParams]="{ company: 'companyA' }"
-                routerLinkActive="text-accent font-semibold"
-                [routerLinkActiveOptions]="{ exact: false }"
-                (click)="toggleMenu()"
-                class="block hover:text-accent"
-              >
-                {{ "layout.mainLayout.careers.companyA" | translate }}
-              </a>
-            </li>
-            <li>
-              <a
-                routerLink="/careers"
-                [queryParams]="{ company: 'companyB' }"
-                routerLinkActive="text-accent font-semibold"
-                [routerLinkActiveOptions]="{ exact: false }"
-                (click)="toggleMenu()"
-                class="block hover:text-accent"
-              >
-                {{ "layout.mainLayout.careers.companyB" | translate }}
-              </a>
-            </li>
+            <li><a routerLink="/services/laws" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.services.laws" | translate }}</a></li>
+            <li><a routerLink="/services/stations" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.services.stations" | translate }}</a></li>
+          </ul>
+        </details>
+      </li>
+
+      <li><a routerLink="/projects" (click)="toggleMenu()" class="hover:text-accent transition">{{ "layout.mainLayout.nav.projects" | translate }}</a></li>
+
+      <li>
+        <details class="group">
+          <summary class="cursor-pointer hover:text-accent transition">
+            {{ "layout.mainLayout.nav.companies" | translate }}
+          </summary>
+          <ul class="ml-4 mt-2 space-y-1 text-base">
+            <li><a routerLink="/companies/oil" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.companies.oil" | translate }}</a></li>
+            <li><a routerLink="/companies/gas" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.companies.gas" | translate }}</a></li>
+            <li><a routerLink="/companies/homs-refinery" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.companies.homs" | translate }}</a></li>
+            <li><a routerLink="/companies/banias-refinery" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.companies.banias" | translate }}</a></li>
+            <li><a routerLink="/companies/fuel" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.companies.fuel" | translate }}</a></li>
           </ul>
         </details>
       </li>
 
       <li>
-        <a
-          routerLink="/contact"
-          routerLinkActive="text-accent font-semibold"
-          [routerLinkActiveOptions]="{ exact: true }"
-          (click)="toggleMenu()"
-          class="hover:text-accent transition"
-        >
-          {{ "layout.mainLayout.nav.contact" | translate }}
-        </a>
+        <details class="group">
+          <summary class="cursor-pointer hover:text-accent transition">
+            {{ "layout.mainLayout.nav.careers" | translate }}
+          </summary>
+          <ul class="ml-4 mt-2 space-y-1 text-base">
+            <li><a routerLink="/jobs/search" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.jobs.search" | translate }}</a></li>
+            <li><a routerLink="/jobs/dashboard" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.jobs.dashboard" | translate }}</a></li>
+            <li><a routerLink="/jobs/cv-builder" (click)="toggleMenu()" class="block hover:text-accent">{{ "layout.mainLayout.jobs.cv" | translate }}</a></li>
+          </ul>
+        </details>
       </li>
+
+      <li><a routerLink="/contact" (click)="toggleMenu()" class="hover:text-accent transition">{{ "layout.mainLayout.nav.contact" | translate }}</a></li>
     </ul>
   </div>
 </nav>

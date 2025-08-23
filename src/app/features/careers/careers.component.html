@@ -1,84 +1,58 @@
 <section
   class="relative w-screen min-h-[70vh] flex flex-col items-center justify-center text-center px-6 bg-gradient-to-l from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10"
 >
-  <div class="absolute inset-0 bg-black/40 "></div>
+  <!-- overlay -->
+  <div class="absolute inset-0 bg-primary-dark/70 z-10"></div>
 
-  <div class="relative z-10 max-w-3xl mt-10 mx-auto">
+  <img 
+    src="images/careers/agreement.webp"
+    alt="agreement image"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+
+  <!-- content -->
+  <div class="relative z-20 max-w-4xl mt-16 mx-auto w-full">
+
+    <nav class="text-gray-200 text-sm md:text-base mb-6">
+      <ol
+        class="flex justify-center space-x-2 md:space-x-4 "
+      >
+        <li>
+          <a routerLink="/" class="hover:text-white transition">
+            {{ 'layout.mainLayout.nav.home' | translate }}
+          </a>
+        </li>
+        <li>/</li>
+        <!-- <li><svg width="24" height="24" fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.005 512.005" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005 L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251 l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"></path> </g> </g> </g></svg></li> -->
+        <li class="text-white font-semibold">
+          {{ 'layout.mainLayout.nav.careers' | translate }}
+        </li>
+      </ol>
+    </nav>
+
+    <!-- title -->
     <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
       {{ 'features.careers.title' | translate }}
     </h1>
     <p class="text-lg md:text-xl text-gray-200 mb-6">
       {{ 'features.careers.subtitle' | translate }}
     </p>
-    <button
-      class="px-6 py-3 bg-primary text-white font-semibold rounded-2xl shadow-lg hover:bg-primary-light transition"
-    >
-      {{ 'features.careers.cta' | translate }}
-    </button>
+
+    <!-- search bar -->
+    <div class="relative max-w-2xl mx-auto w-full">
+      <input
+        type="text"
+        [placeholder]="'features.careers.searchPlaceholder' | translate"
+        class="w-full px-6 py-4 rounded-2xl shadow-lg bg-white/90 backdrop-blur-md text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-3 focus:ring-accent-light transition-all duration-500 transform focus:scale-101"
+      />
+      <!-- search icon -->
+      <span
+        class="absolute top-1/2 -translate-y-1/2 text-primary text-xl cursor-pointer transition hover:scale-110 ltr:right-5 rtl:left-5"
+      >
+       <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></g></svg>
+      </span>
+    </div>
   </div>
 </section>
 
-<div class="container mx-auto px-6 py-10">
-  <h1 class="text-3xl font-bold mb-6 text-primary">
-    {{ 'features.careers.jobsTitle' | translate }}
-  </h1>
-
-  <div class="bg-white shadow-md rounded-2xl p-6 mb-8">
-    <h2 class="text-lg font-semibold mb-4">
-      {{ 'features.careers.filterTitle' | translate }}
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      
-      <input
-        type="text"
-        placeholder="{{ 'features.careers.searchPlaceholder' | translate }}"
-        [(ngModel)]="filters.keyword"
-        class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-primary w-full"
-      />
-
-      <select
-        [(ngModel)]="filters.company"
-        class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-primary w-full"
-      >
-        <option value="">{{ 'features.careers.allCompanies' | translate }}</option>
-        <option *ngFor="let company of companies" [value]="company">{{ company }}</option>
-      </select>
-
-      <select
-        [(ngModel)]="filters.category"
-        class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-primary w-full"
-      >
-        <option value="">{{ 'features.careers.allCategories' | translate }}</option>
-        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-      </select>
-
-      <select
-        [(ngModel)]="filters.location"
-        class="border rounded-xl px-4 py-2 focus:ring-2 focus:ring-primary w-full"
-      >
-        <option value="">{{ 'features.careers.allLocations' | translate }}</option>
-        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="grid gap-6">
-    <div
-      *ngFor="let job of filteredJobs"
-      class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition"
-    >
-      <h3 class="text-xl font-semibold text-gray-800">{{ job.title }}</h3>
-      <p class="text-gray-500">{{ job.company }} • {{ job.location }}</p>
-      <p class="text-sm text-gray-400">{{ job.category }} | {{ job.type }}</p>
-      <button
-        class="mt-4 px-4 py-2 bg-primary text-white rounded-xl hover:bg-primary-light transition"
-      >
-        {{ 'features.careers.applyNow' | translate }}
-      </button>
-    </div>
-
-    <div *ngIf="filteredJobs.length === 0" class="text-center text-gray-500">
-      {{ 'features.careers.noJobsFound' | translate }}
-    </div>
-  </div>
-</div>
+<app-job-list></app-job-list>

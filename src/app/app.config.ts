@@ -4,9 +4,10 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-// import { providePrimeNG } from 'primeng/config';
-// import Aura from '@primeuix/themes/aura';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import {
   HTTP_INTERCEPTORS,
@@ -43,14 +44,14 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json',
       }),
     }),
-
-    // providePrimeNG({
-    //   theme: {
-    //     preset: Aura,
-    //     options: {
-    //       darkModeSelector: '.dark',
-    //     },
-    //   },
-    // }),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark',
+        },
+      },
+    }),
   ],
 };

@@ -34,6 +34,13 @@ export const routes: Routes = [
             (c) => c.CareersComponent
           ),
       },
+         {
+        path: 'careers/:id',
+        loadComponent: () =>
+          import('./features/careers-details/careers-details.component').then(
+            (c) => c.CareersDetailsComponent
+          ),
+      },
     ],
   },
   {
