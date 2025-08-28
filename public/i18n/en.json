@@ -1,7 +1,12 @@
 {
    "shared": {
     "loadMore": "Load More",
-    "backToJobs": "Back to Jobs"
+    "shareWith":" share with ",
+    "backToJobs": "Back to Jobs",
+      "footer": {
+      "rights": "All rights reserved",
+      "privacy": "Privacy Policy"
+    }
   },
   "primeng": {
     "startsWith": "Starts with",
@@ -84,12 +89,12 @@
     "mainLayout": {
        "logoText": "Syrian Oil Adminstration",
       "footer": {
-        "description": "Providing reliable energy solutions and services across Syria.",
+        "description": "The General Oil Administration is a government institution responsible for regulating and managing the oil sector, overseeing its policies to ensure resource sustainability and serve the public interest.",
         "quickLinks": "Quick Links",
         "contactUs": "Contact Us",
         "email": "Email",
         "phone": "Phone",
-        "address": "Address",
+        "address": "Syria - Damascus - Dummar Project (Expansion Square)",
         "country": "Syria"
       },
       "nav": {
@@ -99,6 +104,7 @@
         "projects": "Our Projects",
         "companies": "Companies",
         "careers": "Careers",
+        "careerDetails":"Career Details",
         "contact": "Contact Us"
       },
       "services": {
@@ -110,7 +116,8 @@
         "gas": "Syrian Gas Company",
         "homs": "Homs Refinery Company",
         "banias": "Banias Refinery Company",
-        "fuel": "Fuel Company (Mahroukat)"
+        "fuel": "Fuel Company (Mahroukat)",
+          "transport": "Syrian Oil Transport Company"
       },
       "jobs": {
         "search": "Job Search",
@@ -120,6 +127,15 @@
     }
   },
   "features": {
+      "login": {
+      "title": "Welcome Back",
+      "subtitle": "Please log in to your account",
+      "username": "Username",
+      "password": "Password",
+      "remember": "Remember me",
+      "submit": "Sign In",
+      "forgot": "Forgot your password?"
+    },
     "home": {
       "hero": {
         "buttons": {
@@ -169,6 +185,8 @@
       "jobCategories": "Job Categories",
       "jobTypes": "Job Types",
       "companies": "Companies",
+      "locations": "locations",
+
       "clear": "Clear",
       "sortJobs": "Sort Jobs",
       "jobCode": "Job Code",
@@ -180,7 +198,9 @@
       "responsibilities": "Responsibilities",
       "qualifications": "Qualifications",
       "skills": "Skills",
-      "gender": "Gender Requirement"
+      "gender": "Gender Requirement",
+       "applyFilters": "Apply Filters",
+        "filters": "Filters"
     }
   }
 }

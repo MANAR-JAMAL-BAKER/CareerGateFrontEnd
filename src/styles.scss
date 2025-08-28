@@ -7,52 +7,6 @@
 button{
     cursor: pointer;
 }
-p-select {
-  .p-select {
-    border: 1px solid var(--color-neutral-300);
-    border-radius: 0.75rem;
-    background: var(--color-neutral-50);
-    transition: border-color 0.2s, box-shadow 0.2s;
-
-    &:hover {
-      border-color: var(--color-primary-light);
-    }
-
-    &.p-focus {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px var(--color-primary-light);
-    }
-  }
-
-  .p-select-items {
-    background: var(--color-neutral-50);
-    border: 1px solid var(--color-neutral-200);
-
-    .p-select-item {
-      padding: 0.5rem 1rem;
-      color: var(--color-neutral-800);
-
-      &.p-highlight {
-        background: var(--color-primary-light);
-        color: white;
-      }
-
-      &:hover {
-        background: var(--color-neutral-100);
-      }
-    }
-  }
-}
-
-p-select {
-  .p-select-trigger-icon {
-    transition: transform 0.25s ease;
-  }
-
-  .p-select.p-select-open .p-select-trigger-icon {
-    transform: rotate(180deg);
-  }
-}
 
 :root {
   --checkbox-active-bg: var(--color-primary);
@@ -75,4 +29,41 @@ p-select {
   &:hover .p-checkbox-box {
     border-color: var(--checkbox-hover-border);
   }
+}
+
+
+
+// select style
+
+
+.p-inputwrapper.p-select,
+.form-date-picker input,
+input.p-inputnumber-input {
+  font-size: var(--text-base);
+  border-radius: var(--radius-xl);
+}
+
+.p-inputwrapper.p-select:focus,
+.p-inputnumber-input:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid var(--color-primary-op);
+}
+
+.p-inputwrapper.p-select:hover {
+  border-color: red;
+}
+
+.p-select-option.p-select-option-selected {
+  background-color: var(--color-primary-op) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+.p-select-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.p-select.p-select-open .p-select-dropdown-icon {
+  transform: rotate(180deg);
 }

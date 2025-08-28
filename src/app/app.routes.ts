@@ -14,6 +14,13 @@ export const routes: Routes = [
           import('./features/home/home.component').then((c) => c.HomeComponent),
       },
       {
+        path: 'news',
+        loadComponent: () =>
+          import('./features/news/news.component').then(
+            (c) => c.NewsComponent
+          ),
+      },
+      {
         path: 'about',
         loadComponent: () =>
           import('./features/about/about.component').then(
@@ -21,10 +28,10 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'contact',
+        path: 'contact-us',
         loadComponent: () =>
-          import('./features/contact/contact.component').then(
-            (c) => c.ContactComponent
+          import('./features/contact-us/contact-us.component').then(
+            (c) => c.ContactUsComponent
           ),
       },
       {

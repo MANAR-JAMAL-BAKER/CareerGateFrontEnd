@@ -1,0 +1,81 @@
+<div class="max-w-7xl mx-auto px-5 py-15 grid grid-cols-1 md:grid-cols-2 gap-15">
+  <div class="bg-primary text-white p-10 rounded-2xl shadow-lg">
+    <h2 class="text-4xl mb-8">Contact Information</h2>
+    <div class="mb-8 flex items-start gap-4">
+      <svg class="w-6 h-6 fill-current flex-shrink-0"><use href="/images/contact/social-icons.svg#icon-location"></use></svg>
+      <div class="flex-1">
+        <span class="block text-white/70 text-sm mb-1">Our Location</span>
+        <p class="text-lg leading-normal">123 Business Avenue, New York, NY 10001</p>
+      </div>
+    </div>
+    <div class="mb-8 flex items-start gap-4">
+      <svg class="w-6 h-6 fill-current flex-shrink-0"><use href="/images/contact/social-icons.svg#icon-phone"></use></svg>
+      <div class="flex-1">
+        <span class="block text-white/70 text-sm mb-1">Phone Number</span>
+        <p class="text-lg leading-normal">+1 (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="mb-8 flex items-start gap-4">
+      <svg class="w-6 h-6 fill-current flex-shrink-0"><use href="/images/contact/social-icons.svg#icon-email"></use></svg>
+      <div class="flex-1">
+        <span class="block text-white/70 text-sm mb-1">Email Address</span>
+        <p class="text-lg leading-normal">contact@careergate.com</p>
+      </div>
+    </div>
+    <div class="mb-8 flex items-start gap-4">
+      <svg class="w-6 h-6 fill-current flex-shrink-0"><use href="/images/contact/social-icons.svg#icon-clock"></use></svg>
+      <div class="flex-1">
+        <span class="block text-white/70 text-sm mb-1">Working Hours</span>
+        <p class="text-lg leading-normal">Mon - Fri: 9:00 AM - 6:00 PM</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-10 rounded-2xl shadow-md">
+    <h3 class="text-3xl mb-8">Get in Touch</h3>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="mb-5">
+        <input type="text" formControlName="name" placeholder="Your Name" 
+               class="w-full px-4 py-3.5 border border-neutral-200 rounded-lg text-base bg-neutral-50 focus:outline-none focus:border-primary transition-colors
+                      [&.ng-touched.ng-invalid]:border-red-500">
+        <div class="text-red-500 text-sm mt-1" *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.invalid">
+          Please enter your name
+        </div>
+      </div>
+      <div class="mb-5">
+        <input type="email" formControlName="email" placeholder="john@gmail.com" 
+               class="w-full px-4 py-3.5 border border-neutral-200 rounded-lg text-base bg-neutral-50 focus:outline-none focus:border-primary transition-colors
+                      [&.ng-touched.ng-invalid]:border-red-500">
+        <div class="text-red-500 text-sm mt-1" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
+          Please enter a valid email
+        </div>
+      </div>
+      <div class="mb-5">
+        <textarea formControlName="message" placeholder="Message" rows="4" 
+                  class="w-full px-4 py-3.5 border border-neutral-200 rounded-lg text-base bg-neutral-50 focus:outline-none focus:border-primary transition-colors
+                         [&.ng-touched.ng-invalid]:border-red-500"></textarea>
+        <div class="text-red-500 text-sm mt-1" *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid">
+          Please enter your message
+        </div>
+      </div>
+      <button type="submit" 
+              class="w-full bg-primary text-white px-8 py-4 rounded-lg text-base font-semibold cursor-pointer transition-colors hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed" 
+              [disabled]="contactForm.invalid">Get in Touch</button>
+    </form>
+  </div>
+
+  <div class="col-span-1 md:col-span-2 h-[450px] bg-neutral-100 rounded-2xl my-15 overflow-hidden">
+  </div>
+
+  <div class="col-span-1 md:col-span-2 text-center py-10">
+    <h4 class="text-2xl text-neutral-600 mb-10 font-semibold">OUR TRUSTED CLIENTS</h4>
+    <div class="flex flex-wrap justify-between md:justify-center items-center gap-5">
+      <img src="assets/logos/toy-jesh.png" alt="Toy Jesh" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+      <img src="assets/logos/sefrov.png" alt="Sefrov" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+      <img src="assets/logos/waleon.png" alt="Waleon" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+      <img src="assets/logos/calsa.png" alt="Calsa" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+      <img src="assets/logos/contex.png" alt="Contex" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+      <img src="assets/logos/toy-jesh.png" alt="Toy Jesh" class="max-w-[120px] md:max-w-[100px] opacity-70 hover:opacity-100 transition-opacity">
+    </div>
+  </div>
+</div>

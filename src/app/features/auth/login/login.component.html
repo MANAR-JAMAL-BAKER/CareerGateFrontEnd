@@ -1,38 +1,185 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-<img src="logos/Emblem_of_Syria.svg" alt="Your Company" class="mx-auto h-10 w-auto" />
-    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-  </div>
+<div
+  class="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-white to-gray-100"
+>
+  <!-- Header -->
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form action="#" method="POST" class="space-y-6">
-      <div>
-        <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
-        <div class="mt-2">
-          <input id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+  <!-- Main Layout -->
+  <main class="flex-1 flex flex-col lg:flex-row">
+    <!-- Left Section (Image + Welcome Text) -->
+    <div class="hidden lg:flex w-1/2 items-center justify-center relative p-10">
+      <!-- Logo + Title -->
+
+      <div
+        class="absolute inset-0 h-full w-full bg-gradient-to-br from-primary/20 to-primary/60 z-20"
+      ></div>
+      <img
+        class="absolute inset-0 z-10 w-full h-full"
+        src="images/login/Storage-Tanks.jpg"
+      />
+
+      <!-- Logo + Title -->
+      <div
+        class="relative z-30 flex column  items-center gap-3  p-4 text-white rounded-xl bg-white/40 backdrop-blur-2xl"
+      >
+        <img src="logos/Emblem_of_Syria.svg" alt="App Logo" class="h-10 w-10" />
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold text-primary">
+            {{ "features.login.title" | translate }}
+          </h1>
+          <p class="text-sm text-gray-700">
+            {{ "features.login.subtitle" | translate }}
+          </p>
         </div>
       </div>
+    </div>
 
-      <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-          <div class="text-sm">
-            <a href="#" class="font-semibold text-primary hover:text-primary-500">Forgot password?</a>
+    <!-- Right Section (Form) -->
+
+    <div
+      class="flex w-full lg:w-1/2  flex-col items-center justify-center px-6 sm:px-10 py-10"
+    >
+      <div class="flex justify-end align-self-start w-full mb-10">
+        <button
+          (click)="languageService.toggleLang()"
+          class="flex items-center cursor-pointer gap-2 px-3 py-1 text-sm sm:text-base rounded-lg text-primary bg-white/80 hover:bg-primary/10 transition shadow"
+        >
+          <img
+            [src]="
+              languageService.currentLang === 'ar'
+                ? 'icons/sy-flag.svg'
+                : 'icons/uk-flag.svg'
+            "
+            [alt]="languageService.currentLang === 'ar' ? 'العربية' : 'English'"
+            class="h-6 w-6 rounded-full shadow"
+          />
+          <span class="font-medium hidden md:inline">
+            {{
+              languageService.currentLang === "ar"
+                ? ("lang.ar" | translate)
+                : ("lang.en" | translate)
+            }}
+          </span>
+        </button>
+      </div>
+
+      <section
+        class="w-full max-w-md  rounded-2xl shadow-2xl p-8 border border-white/60"
+      >
+        <!-- Logo above form (mobile only) -->
+        <div class="flex justify-center mb-6 lg:hidden">
+          <img
+            src="logos/Emblem_of_Syria.svg"
+            alt="App Logo"
+            class="h-16 w-16"
+          />
+        </div>
+
+        <h2 class="text-2xl font-semibold text-primary mb-6 text-center">
+          {{ "features.login.subtitle" | translate }}
+        </h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
+          <!-- Username -->
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">
+              {{ "features.login.username" | translate }}
+            </label>
+            <input
+              formControlName="username"
+              class="w-full rounded-xl border px-4 py-3 bg-white/70 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+              [ngClass]="{
+                'border-red-500':
+                  form.get('username')?.invalid && form.get('username')?.touched
+              }"
+              [placeholder]="'features.login.username' | translate"
+            />
+            <p
+              *ngIf="
+                form.get('username')?.invalid && form.get('username')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              {{ "features.login.username" | translate }} is required
+            </p>
           </div>
-        </div>
-        <div class="mt-2">
-          <input id="password" type="password" name="password" required autocomplete="current-password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
-        </div>
-      </div>
 
-      <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-primary indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-      </div>
-    </form>
+          <!-- Password with toggle -->
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">
+              {{ "features.login.password" | translate }}
+            </label>
+            <div class="relative">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                class="w-full rounded-xl border px-4 py-3 pr-12 bg-white/70 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+                [ngClass]="{
+                  'border-red-500':
+                    form.get('password')?.invalid &&
+                    form.get('password')?.touched
+                }"
+                [placeholder]="'features.login.password' | translate"
+              />
+              <button
+                type="button"
+                (click)="showPassword = !showPassword"
+                class="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-primary"
+                tabindex="-1"
+              >
+                <i
+                  [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                ></i>
+              </button>
+            </div>
+            <p
+              *ngIf="
+                form.get('password')?.invalid && form.get('password')?.touched
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              {{ "features.login.password" | translate }} is required
+            </p>
+          </div>
 
-    <p class="mt-10 text-center text-sm/6 text-gray-500">
-      Not a member?
-      <a href="#" class="font-semibold text-secondary  hover:text-primary-500">Start a 14 day free trial</a>
-    </p>
-  </div>
+          <!-- Remember me -->
+          <div class="flex items-center gap-2 text-gray-700">
+            <input
+              type="checkbox"
+              formControlName="remember"
+              class="rounded border-gray-300 text-accent focus:ring-accent"
+            />
+            <label class="text-sm">{{
+              "features.login.remember" | translate
+            }}</label>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            class="w-full rounded-xl bg-primary hover:bg-primary-dark text-white py-3 font-medium shadow-lg transition transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {{ "features.login.submit" | translate }}
+          </button>
+
+          <!-- Forgot password -->
+          <div class="text-center">
+            <a href="#" class="text-sm text-accent hover:underline">
+              {{ "features.login.forgot" | translate }}
+            </a>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+   <div
+    class="bg-primary text-center py-3 text-sm text-neutral-400 border-t border-accent/30"
+  >
+      © {{ currentYear }} {{ "layout.mainLayout.logoText" | translate }} -
+      {{ "layout.mainLayout.footer.country" | translate }}
+    </div>
+  </footer>
 </div>

@@ -2,85 +2,30 @@
   <h1 class="text-3xl font-bold mb-8 text-primary">
     {{ "features.careers.jobsAvailable" | translate }}
   </h1>
-
+  <app-careers-filters
+    [companies]="companies"
+    [locations]="locations"
+    [jobTypes]="jobTypes"
+    [categories]="categories"
+    [(filters)]="filters"
+    [sortOptions]="sortOptions"
+    [(sortOption)]="sortOption"
+  >
+  </app-careers-filters>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     <!-- Sidebar -->
     <aside
-      class="bg-white border border-gray-300 rounded-2xl p-6 space-y-6 md:col-span-1"
+      class="bg-white hidden md:block border border-gray-300 rounded-2xl p-6 space-y-6 md:col-span-1"
     >
       <!-- Clear All -->
-<div class="flex justify-end mb-4">
-  <button
-    class="text-xs cursor-pointer font-semibold text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-sm"
-    (click)="clearAll()"
-  >
-    {{ "features.careers.clearAll" | translate }}
-  </button>
-</div>
-      <!-- Categories -->
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-semibold text-gray-800">
-            {{ "features.careers.jobCategories" | translate }}
-          </h2>
-          <button
-            class="text-xs text-primary hover:underline"
-            (click)="clearFilter('categories')"
-          >
-            {{ "features.careers.clear" | translate }}
-          </button>
-        </div>
-        <div class="space-y-2">
-          <label
-            class="flex items-center justify-between text-gray-600"
-            *ngFor="let cat of categories"
-          >
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                [checked]="filters.types.includes(cat.name)"
-                (change)="toggleFilter(filters.types, cat.name)"
-                class="rounded text-primary"
-              />
-              {{ cat.name | localized : languageService.currentLang }}
-            </div>
-            <span class="text-xs text-gray-400">({{ cat.count }})</span>
-          </label>
-        </div>
+      <div class="flex justify-end mb-4">
+        <button
+          class="text-xs cursor-pointer font-semibold text-red-600 border border-red-600 rounded-lg px-2 py-1 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-sm"
+          (click)="clearAll()"
+        >
+          {{ "features.careers.clearAll" | translate }}
+        </button>
       </div>
-
-      <!-- Job Types -->
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-semibold text-gray-800">
-            {{ "features.careers.jobTypes" | translate }}
-          </h2>
-          <button
-            class="text-xs text-primary hover:underline"
-            (click)="clearFilter('types')"
-          >
-            {{ "features.careers.clear" | translate }}
-          </button>
-        </div>
-        <div class="space-y-2">
-          <label
-            class="flex items-center justify-between text-gray-600"
-            *ngFor="let t of jobTypes"
-          >
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                [checked]="filters.types.includes(t.name)"
-                (change)="toggleFilter(filters.types, t.name)"
-                class="rounded text-primary"
-              />
-              {{ t.name | localized : languageService.currentLang }}
-            </div>
-            <span class="text-xs text-gray-400">({{ t.count }})</span>
-          </label>
-        </div>
-      </div>
-
       <!-- Companies -->
       <div>
         <div class="flex items-center justify-between mb-3">
@@ -112,26 +57,130 @@
           </label>
         </div>
       </div>
+
+      <!-- Locations -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold text-gray-800">
+            {{ "features.careers.locations" | translate }}
+          </h2>
+          <button
+            class="text-xs text-primary hover:underline"
+            (click)="clearFilter('locations')"
+          >
+            {{ "features.careers.clear" | translate }}
+          </button>
+        </div>
+        <div class="space-y-2">
+          <label
+            class="flex items-center justify-between text-gray-600"
+            *ngFor="let loc of locations"
+          >
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                [checked]="filters.locations.includes(loc.name)"
+                (change)="toggleFilter(filters.locations, loc.name)"
+                class="rounded text-primary"
+              />
+              {{ loc.name | localized : languageService.currentLang }}
+            </div>
+            <span class="text-xs text-gray-400">({{ loc.count }})</span>
+          </label>
+        </div>
+      </div>
+      <!-- Job Types -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold text-gray-800">
+            {{ "features.careers.jobTypes" | translate }}
+          </h2>
+          <button
+            class="text-xs text-primary hover:underline"
+            (click)="clearFilter('types')"
+          >
+            {{ "features.careers.clear" | translate }}
+          </button>
+        </div>
+        <div class="space-y-2">
+          <label
+            class="flex items-center justify-between text-gray-600"
+            *ngFor="let t of jobTypes"
+          >
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                [checked]="filters.types.includes(t.name)"
+                (change)="toggleFilter(filters.types, t.name)"
+                class="rounded text-primary"
+              />
+              {{ t.name | localized : languageService.currentLang }}
+            </div>
+            <span class="text-xs text-gray-400">({{ t.count }})</span>
+          </label>
+        </div>
+      </div>
+      <!-- Categories -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold text-gray-800">
+            {{ "features.careers.jobCategories" | translate }}
+          </h2>
+          <button
+            class="text-xs text-primary hover:underline"
+            (click)="clearFilter('categories')"
+          >
+            {{ "features.careers.clear" | translate }}
+          </button>
+        </div>
+        <div class="space-y-2">
+          <label
+            class="flex items-center justify-between text-gray-600"
+            *ngFor="let cat of categories"
+          >
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                [checked]="filters.categories.includes(cat.name)"
+                (change)="toggleFilter(filters.categories, cat.name)"
+                class="rounded text-primary"
+              />
+              {{ cat.name | localized : languageService.currentLang }}
+            </div>
+            <span class="text-xs text-gray-400">({{ cat.count }})</span>
+          </label>
+        </div>
+      </div>
     </aside>
 
     <!-- Jobs Grid -->
     <main class="md:col-span-3">
       <!-- Sorting -->
-      <div class="flex justify-end mb-4">
+      <div class="justify-end mb-4 hidden md:flex">
         <p-select
           [options]="sortOptions"
           [(ngModel)]="sortOption"
-          optionLabel="label"
           optionValue="value"
           placeholder="{{ 'features.careers.sortJobs' | translate }}"
-          class="w-56 rounded-xl border border-gray-300 shadow-sm cursor-pointer"
+          class="w-56 rounded-xl border border-gray-300  cursor-pointer"
         >
           <ng-template let-option pTemplate="item">
             <div
               class="flex items-center gap-2 text-gray-700 hover:text-primary"
             >
               <i [class]="option.icon + ' text-primary'"></i>
-              <span>{{ option.label }}</span>
+              <span>{{
+                option.label | localized : languageService.currentLang
+              }}</span>
+            </div>
+          </ng-template>
+
+          <ng-template let-option pTemplate="selectedItem">
+            <div class="flex items-center gap-2 text-gray-700">
+              <i [class]="option.icon + ' text-primary'"></i>
+              <span>{{
+                option.label | localized : languageService.currentLang
+              }}</span>
             </div>
           </ng-template>
         </p-select>
@@ -151,7 +200,7 @@
               <img
                 [src]="job.logo"
                 [alt]="job.company | localized : languageService.currentLang"
-                class="w-full h-full rounded-xl object-cover "
+                class="w-full h-full rounded-xl object-cover"
                 (error)="onLogoError($event)"
               />
             </div>
@@ -202,14 +251,14 @@
               {{ job.company | localized : languageService.currentLang }}
             </p>
 
-            <!-- Job Code -->
+            <!-- Location -->
             <p class="flex items-center gap-1">
               <img
-                src="icons/careers/hashtag-icon.svg"
-                alt="hashtag icon"
+                src="icons/careers/map-marker-icon.svg"
+                alt="Map marker  icon"
                 class="w-4 h-4"
               />
-              {{ "features.careers.jobCode" | translate }}: {{ job.code }}
+              {{ job.location | localized : languageService.currentLang }}
             </p>
 
             <!-- Date -->
@@ -222,16 +271,15 @@
               {{ "features.careers.posted" | translate }}: {{ job.postedDate }}
             </p>
 
-            <!-- Location -->
+            <!-- Job Code -->
             <p class="flex items-center gap-1">
               <img
-                src="icons/careers/map-marker-icon.svg"
-                alt="Map marker  icon"
+                src="icons/careers/hashtag-icon.svg"
+                alt="hashtag icon"
                 class="w-4 h-4"
               />
-              {{ job.location | localized : languageService.currentLang }}
+              {{ "features.careers.jobCode" | translate }}: {{ job.code }}
             </p>
-
             <!-- Role -->
             <p class="flex items-center gap-1">
               <img
@@ -245,12 +293,12 @@
 
           <!-- Footer -->
           <div class="mt-auto">
-<button
-  (click)="goToJobDetails(job.id)"
-  class="w-full cursor-pointer mt-4 px-4 py-2 border border-primary text-primary rounded-xl hover:bg-primary hover:text-white transition"
->
-  {{ "features.careers.jobDetails" | translate }}
-</button>
+            <button
+              (click)="goToJobDetails(job.id)"
+              class="w-full cursor-pointer mt-4 px-4 py-2 border border-primary text-primary rounded-xl hover:bg-primary hover:text-white transition"
+            >
+              {{ "features.careers.jobDetails" | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -261,15 +309,13 @@
       </div>
 
       <!-- Load More -->
-<div class="flex justify-center mt-8">
-  <button
-    class="px-6 py-3 cursor-pointer bg-accent text-white rounded-xl hover:bg-accent-light transition"
-  >
-        {{ "shared.loadMore" | translate }}
-  </button>
-</div>
+      <div class="flex justify-center mt-8">
+        <button
+          class="px-6 py-3 cursor-pointer bg-accent text-white rounded-xl hover:bg-accent-light transition"
+        >
+          {{ "shared.loadMore" | translate }}
+        </button>
+      </div>
     </main>
   </div>
 </div>
-
-

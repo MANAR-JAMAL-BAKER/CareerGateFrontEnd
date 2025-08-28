@@ -1,0 +1,184 @@
+<div class="flex gap-2">
+  <!-- Filter Button -->
+  <button
+    class="flex md:hidden h-fit gap-2 items-center bg-transparent text-gray-600 border border-gray-300 px-4 py-2 rounded-lg"
+    (click)="openFilters()"
+  >
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M15 10.5A3.502 3.502 0 0 0 18.355 8H21a1 1 0 1 0 0-2h-2.645a3.502 3.502 0 0 0-6.71 0H3a1 1 0 0 0 0 2h8.645A3.502 3.502 0 0 0 15 10.5zM3 16a1 1 0 1 0 0 2h2.145a3.502 3.502 0 0 0 6.71 0H21a1 1 0 0 0 0-2h-9.145a3.502 3.502 0 0 0-6.71 0H3z"
+        fill="currentColor"
+      />
+    </svg>
+       {{ "features.careers.filters" | translate }}
+
+  </button>
+
+  <!-- Sorting -->
+  <div class="flex-grow mb-4 flex md:hidden">
+    <p-select
+      [options]="sortOptions"
+      [(ngModel)]="sortOption"
+      optionValue="value"
+      placeholder="{{ 'features.careers.sortJobs' | translate }}"
+      class="w-full rounded-xl border border-gray-300 cursor-pointer"
+    >
+      <ng-template let-option pTemplate="item">
+        <div class="flex items-center gap-2 text-gray-700 hover:text-primary">
+          <i [class]="option.icon + ' text-primary'"></i>
+          <span>{{ option.label | localized : languageService.currentLang }}</span>
+        </div>
+      </ng-template>
+
+      <ng-template let-option pTemplate="selectedItem">
+        <div class="flex items-center gap-2 text-gray-700">
+          <i [class]="option.icon + ' text-primary'"></i>
+          <span>{{ option.label | localized : languageService.currentLang }}</span>
+        </div>
+      </ng-template>
+    </p-select>
+  </div>
+</div>
+
+<!-- Filters Dialog -->
+<p-dialog
+ [header]="'features.careers.filters' | translate"
+  [(visible)]="showFilter"
+  [modal]="true"
+  [dismissableMask]="true"
+  [style]="{ width: '100vw', height: '70vh', margin: 0 }"
+  [breakpoints]="{ '960px': '100vw', '640px': '100vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  contentStyleClass="flex flex-col h-full"
+  styleClass="dialog-bottom"
+>
+  <!-- Filters Content (scrollable) -->
+  <div class="flex-1 overflow-y-auto pr-2">
+    <p-accordion [multiple]="true" [value]="['0']">
+      <!-- Companies -->
+      <p-accordion-panel value="0">
+        <p-accordion-header>
+          {{ "features.careers.companies" | translate }}
+        </p-accordion-header>
+        <p-accordion-content>
+          <div class="space-y-2">
+            <label
+              class="flex items-center justify-between text-gray-600"
+              *ngFor="let comp of companies"
+            >
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  [checked]="tempFilters.companies.includes(comp.name)"
+                  (change)="toggleFilter(tempFilters.companies, comp.name)"
+                  class="rounded text-primary"
+                />
+                {{ comp.name | localized : languageService.currentLang }}
+              </div>
+              <span class="text-xs text-gray-400">({{ comp.count }})</span>
+            </label>
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+
+      <!-- Locations -->
+      <p-accordion-panel value="1">
+        <p-accordion-header>
+          {{ "features.careers.locations" | translate }}
+        </p-accordion-header>
+        <p-accordion-content>
+          <div class="space-y-2">
+            <label
+              class="flex items-center justify-between text-gray-600"
+              *ngFor="let loc of locations"
+            >
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  [checked]="tempFilters.locations.includes(loc.name)"
+                  (change)="toggleFilter(tempFilters.locations, loc.name)"
+                  class="rounded text-primary"
+                />
+                {{ loc.name | localized : languageService.currentLang }}
+              </div>
+              <span class="text-xs text-gray-400">({{ loc.count }})</span>
+            </label>
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+
+      <!-- Job Types -->
+      <p-accordion-panel value="2">
+        <p-accordion-header>
+          {{ "features.careers.jobTypes" | translate }}
+        </p-accordion-header>
+        <p-accordion-content>
+          <div class="space-y-2">
+            <label
+              class="flex items-center justify-between text-gray-600"
+              *ngFor="let t of jobTypes"
+            >
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  [checked]="tempFilters.types.includes(t.name)"
+                  (change)="toggleFilter(tempFilters.types, t.name)"
+                  class="rounded text-primary"
+                />
+                {{ t.name | localized : languageService.currentLang }}
+              </div>
+              <span class="text-xs text-gray-400">({{ t.count }})</span>
+            </label>
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+
+      <!-- Categories -->
+      <p-accordion-panel value="3">
+        <p-accordion-header>
+          {{ "features.careers.jobCategories" | translate }}
+        </p-accordion-header>
+        <p-accordion-content>
+          <div class="space-y-2">
+            <label
+              class="flex items-center justify-between text-gray-600"
+              *ngFor="let cat of categories"
+            >
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  [checked]="tempFilters.categories.includes(cat.name)"
+                  (change)="toggleFilter(tempFilters.categories, cat.name)"
+                  class="rounded text-primary"
+                />
+                {{ cat.name | localized : languageService.currentLang }}
+              </div>
+              <span class="text-xs text-gray-400">({{ cat.count }})</span>
+            </label>
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+    </p-accordion>
+  </div>
+
+  <!-- Footer  -->
+  <div class="border-t p-3 flex justify-between">
+    <button
+      class="text-red-600 border border-red-600 rounded-lg px-4 py-2 text-sm font-semibold hover:bg-red-600 hover:text-white transition"
+      (click)="clearAll()"
+    >
+      {{ "features.careers.clearAll" | translate }}
+    </button>
+
+    <button
+      class="bg-primary text-white rounded-lg px-4 py-2 text-sm font-semibold hover:bg-primary/90 transition"
+      (click)="applyFilters()"
+    >
+      {{ "features.careers.applyFilters" | translate }}
+    </button>
+  </div>
+</p-dialog>

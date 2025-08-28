@@ -1,0 +1,82 @@
+.contact-container {
+  @apply max-w-7xl mx-auto px-4 py-16;
+
+  .contact-card {
+    @apply bg-neutral-900 rounded-2xl p-8 mb-12 flex flex-col md:flex-row gap-8;
+
+    .contact-info {
+      @apply flex-1;
+
+      h2 {
+        @apply text-3xl font-bold text-white mb-8;
+      }
+
+      .contact-details {
+        @apply space-y-6;
+
+        .contact-item {
+          @apply flex items-center gap-4 text-neutral-300;
+
+          svg {
+            @apply text-accent;
+          }
+        }
+      }
+    }
+
+    .contact-image {
+      @apply flex-1;
+      img {
+        @apply w-full h-full object-cover rounded-xl;
+      }
+    }
+  }
+
+  .form-section {
+    @apply bg-white rounded-2xl p-8 shadow-lg mb-12;
+
+    h3 {
+      @apply text-2xl font-bold text-neutral-900 mb-6;
+    }
+
+    form {
+      @apply space-y-6;
+
+      .form-group {
+        @apply space-y-2;
+
+        input, textarea {
+          @apply w-full px-4 py-3 rounded-lg border border-neutral-300 focus:border-primary focus:ring-2 focus:ring-primary-light outline-none transition;
+        }
+
+        .error {
+          @apply text-sm text-red-600;
+        }
+      }
+
+      .get-in-touch-btn {
+        @apply w-full bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed;
+      }
+    }
+  }
+
+  .map-container {
+    @apply h-96 rounded-2xl overflow-hidden mb-12;
+  }
+
+  .clients-section {
+    @apply text-center;
+
+    h4 {
+      @apply text-xl font-bold text-neutral-900 mb-8;
+    }
+
+    .client-logos {
+      @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center;
+
+      img {
+        @apply max-w-[120px] mx-auto grayscale hover:grayscale-0 transition cursor-pointer;
+      }
+    }
+  }
+}

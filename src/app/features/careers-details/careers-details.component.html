@@ -1,215 +1,714 @@
-<section
-  class="relative w-full min-h-[70vh] flex flex-col items-center justify-center text-center px-6 bg-gradient-to-l from-primary-dark/90 via-primary-dark/70 via-primary-dark/60 to-primary-dark/10"
->
-  <!-- overlay -->
-  <div class="absolute inset-0 bg-primary-dark/70 z-10"></div>
-
-  <img 
-    src="images/careers/agreement.webp"
-    alt="agreement image"
-    class="absolute inset-0 w-full h-full object-cover"
-  />
-
-  <!-- content -->
-  <div class="relative z-20 max-w-4xl mt-16 mx-auto w-full">
-
-    <nav class="text-gray-200 text-sm md:text-base mb-6">
-      <ol
-        class="flex justify-center space-x-2 md:space-x-4 "
+<div *ngIf="job" class="min-h-screen ">
+  <section
+    class="relative w-full h-[70vh] max-h-[600px] z-10 flex flex-col items-center justify-center text-center px-6 bg-gradient-to-l from-primary/90 via-primary/80 to-primary/60"
+  >
+    <div class="absolute inset-0 z-0 opacity-5">
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
       >
-        <li>
-          <a routerLink="/" class="hover:text-white transition">
-            {{ 'layout.mainLayout.nav.home' | translate }}
-          </a>
-        </li>
-        <li>/</li>
-        <li class="text-white ">
-          {{ 'layout.mainLayout.nav.careers' | translate }}
-        </li>
-        <li>/</li>
+        <pattern id="grid-pattern" x="0" y="0" width="0.05" height="0.05">
+          <path
+            d="M 10,0 L 0,0 0,10"
+            fill="none"
+            stroke="white"
+            stroke-width="0.5"
+          />
+        </pattern>
+        <rect
+          x="0"
+          y="0"
+          width="100"
+          height="100"
+          fill="url(#grid-pattern)"
+        ></rect>
+      </svg>
+    </div>
 
-        <li class="text-white font-semibold">
-      {{job.company | localized:languageService.currentLang}}
-        </li>
-      </ol>
-    </nav>
+    <!-- content -->
+    <div class="relative z-10 max-w-4xl mt-16 mx-auto w-full">
+      <!-- breadcrumb -->
+      <nav class="text-gray-200 text-sm md:text-base mb-6">
+        <ol class="flex justify-center space-x-2 md:space-x-4">
+          <li class="flex items-center">
+            <a
+              routerLink="/"
+              class="hover:text-white transition flex items-center"
+            >
+              {{ "layout.mainLayout.nav.home" | translate }}
+            </a>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-3 h-3 mx-1" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </li>
+          <li class="flex items-center">
+            <a
+              routerLink="/careers"
+              class="hover:text-white transition flex items-center"
+            >
+              {{ "layout.mainLayout.nav.careers" | translate }}
+            </a>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-3 h-3 mx-1" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </li>
+          <li class="flex items-center text-white font-semibold">
+            {{ "layout.mainLayout.nav.careerDetails" | translate }}
+          </li>
+        </ol>
+      </nav>
 
-    <!-- title -->
-    <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
-      {{ 'features.careers.title' | translate }}
-    </h1>
-    <p class="text-lg md:text-xl text-gray-200 mb-6">
-      {{ 'features.careers.subtitle' | translate }}
-    </p>
-
-
-  </div>
-</section>
-
-<div class="container mx-auto px-4 md:px-8 py-10" *ngIf="job">
-  <div class="grid lg:grid-cols-3 gap-8">
-
-    <!-- Main Job Details -->
-    <div class="lg:col-span-2">
-      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-10">
-
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row items-center justify-between mb-8">
-          <div class="flex items-center gap-4">
-            <img
-              [src]="job.logo"
-              [alt]="job.company.ar"
-              class="w-16 h-16 md:w-24 md:h-24 rounded-xl border shadow-sm object-cover"
-            />
-            <div>
-              <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
-                {{ job.title | localized : languageService.currentLang }}
-              </h1>
-              <p class="text-gray-600 mt-1">
-                {{ job.company | localized : languageService.currentLang }} ·
-                <span class="text-primary font-medium">
-                  {{ job.location | localized : languageService.currentLang }}
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <!-- Job Type Badge -->
-          <span
-            class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold rounded-full shadow-sm"
-            [ngClass]="{
-              'bg-green-100 text-green-700':
-                (job.type | localized : languageService.currentLang) === 'Full Time' || 
-                (job.type | localized : languageService.currentLang) === 'دوام كامل',
-              'bg-blue-100 text-blue-700':
-                (job.type | localized : languageService.currentLang) === 'Part Time' || 
-                (job.type | localized : languageService.currentLang) === 'دوام جزئي',
-              'bg-yellow-100 text-yellow-700':
-                (job.type | localized : languageService.currentLang) === 'Internship' || 
-                (job.type | localized : languageService.currentLang) === 'تدريب',
-              'bg-purple-100 text-purple-700':
-                (job.type | localized : languageService.currentLang) === 'Contract' || 
-                (job.type | localized : languageService.currentLang) === 'عقد'
-            }"
-          >
+      <div class="text-center py-1">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-white">
+          {{ job.title | localized : languageService.currentLang }}
+        </h1>
+        <div
+          class="flex flex-wrap justify-center items-center mt-2 text-accent-light gap-3"
+        >
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+              />
+            </svg>
             {{ job.type | localized : languageService.currentLang }}
           </span>
+          •
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+              />
+            </svg>
+            {{ job.location | localized : languageService.currentLang }}
+          </span>
+          •
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
+              />
+            </svg>
+            {{ job.company | localized : languageService.currentLang }}
+          </span>
+          <span class="flex items-center gap-1">
+            <svg
+              class="w-4 h-4 mr-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M13 21L17 3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M7 21L11 3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M20 9L4 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M4 15L20 15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+            {{ "features.careers.jobCode" | translate }}: {{ job.code }}
+          </span>
         </div>
-
-        <!-- Job Details -->
-        <div class="grid md:grid-cols-2 gap-10 text-gray-800">
-          <!-- Responsibilities -->
-          <div>
-            <h2 class="text-xl font-semibold mb-3 text-primary">
-              {{ "features.careers.responsibilities" | translate }}
-            </h2>
-            <ul class="list-disc pl-6 space-y-2">
-              <li *ngFor="let item of job.responsibilities">
-                {{ item | localized : languageService.currentLang }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Qualifications -->
-          <div>
-            <h2 class="text-xl font-semibold mb-3 text-primary">
-              {{ "features.careers.qualifications" | translate }}
-            </h2>
-            <ul class="list-disc pl-6 space-y-2">
-              <li *ngFor="let item of job.qualifications">
-                {{ item | localized : languageService.currentLang }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Skills -->
-          <div>
-            <h2 class="text-xl font-semibold mb-3 text-primary">
-              {{ "features.careers.skills" | translate }}
-            </h2>
-            <ul class="list-disc pl-6 space-y-2">
-              <li *ngFor="let skill of job.skills">
-                {{ skill | localized : languageService.currentLang }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Gender -->
-          <div>
-            <h2 class="text-xl font-semibold mb-3 text-primary">
-              {{ "features.careers.gender" | translate }}
-            </h2>
-            <p class="px-4 py-2 bg-gray-100 rounded-lg inline-block shadow-sm">
-              {{ job.gender | localized : languageService.currentLang }}
-            </p>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-10 flex justify-center gap-4">
-          <button
-            class="px-8 py-3 rounded-xl bg-primary text-white font-medium shadow-md hover:bg-primary-dark transition"
-            (click)="router.navigate(['/careers'])"
+        <button
+          class="px-8 py-2 mt-6 rounded-xl bg-accent text-white font-medium shadow-md hover:bg-accent-dark transition flex items-center justify-center mx-auto gap-2"
+          (click)="router.navigate(['/apply', job.id])"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            fill="#000000"
           >
-            {{ "shared.backToJobs" | translate }}
-          </button>
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <title></title>
+              <g
+                fill="none"
+                fill-rule="evenodd"
+                id="页面-1"
+                stroke="none"
+                stroke-linecap="round"
+                stroke-width="1"
+              >
+                <g
+                  id="导航图标"
+                  stroke="#fff"
+                  stroke-width="1.5"
+                  transform="translate(-103.000000, -334.000000)"
+                >
+                  <g id="申请" transform="translate(103.000000, 334.000000)">
+                    <g id="路径" transform="translate(4.000000, 2.000000)">
+                      <path
+                        d="M16,14.5 L16,19 C16,19.5523 15.5523,20 15,20 L11.75,20"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16,6 L16,1 C16,0.447715 15.5523,0 15,0 L1,0 C0.447715,0 0,0.447715 0,1 L0,19 C0,19.5523 0.447715,20 1,20 L4,20"
+                        stroke-linejoin="round"
+                      ></path>
+                      <line x1="4" x2="11" y1="6" y2="6"></line>
+                      <line x1="7.5" x2="16" y1="20" y2="9.5"></line>
+                      <line x1="4" x2="8" y1="10" y2="10"></line>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
 
-          <!-- Apply Now Button -->
+          {{ "features.careers.applyNow" | translate }}
+        </button>
+      </div>
+      <!-- <h6 class="text-accent mb-3"> 
+          {{ "shared.shareWith" | translate }}
+</h6> -->
+      <!-- Share Section -->
+      <!-- <div class="border-t border-accent/40 w-fit mx-auto pt-4 social-links "> -->
+      <div class="w-fit mx-auto pt-4 social-links">
+        <div class="flex gap-4 justify-center flex-wrap">
           <button
-            class="px-8 py-3 rounded-xl bg-accent text-white font-medium shadow-md hover:bg-accent-dark transition"
-            (click)="router.navigate(['/apply', job.id])"
+            (click)="copyLink()"
+            [disabled]="disabled"
+            class="w-8 h-8 flex items-center border border-accent-dark justify-center rounded-md bg-primary-light/30 text-accent hover:bg-accent/50 hover:text-primary-dark transition"
           >
-            {{ 'features.careers.applyNow' | translate }}
+            <!-- copy svg -->
+            <svg
+              *ngIf="!copied"
+              class="w-5 h-5 transition-transform duration-300"
+              viewBox="0 -0.5 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.94605 4.99995L13.2541 4.99995C14.173 5.00498 15.0524 5.37487 15.6986 6.02825C16.3449 6.68163 16.7051 7.56497 16.7001 8.48395V12.716C16.7051 13.6349 16.3449 14.5183 15.6986 15.1717C15.0524 15.825 14.173 16.1949 13.2541 16.2H8.94605C8.02707 16.1949 7.14773 15.825 6.50148 15.1717C5.85522 14.5183 5.495 13.6349 5.50005 12.716L5.50005 8.48495C5.49473 7.5658 5.85484 6.6822 6.50112 6.0286C7.1474 5.375 8.0269 5.00498 8.94605 4.99995Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M10.1671 19H14.9371C17.4857 18.9709 19.5284 16.8816 19.5001 14.333V9.666"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+
+            <!-- check svg -->
+            <svg
+              *ngIf="copied"
+              class="w-5 h-5 text-green-500 animate-bounce"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 14L9 19L20 8M6 8.88889L9.07692 12L16 5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
           </button>
+          <!-- Facebook -->
+          <a
+            [href]="getFacebookLink()"
+            target="_blank"
+            class="w-8 h-8 flex items-center border border-accent-dark justify-center rounded-md bg-primary-light/30 text-accent hover:bg-accent/50 hover:text-primary-dark transition"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="var(--color-accent)"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="7935ec95c421cee6d86eb22ecd11b7e3">
+                  <path
+                    style="display: inline"
+                    d="M283.122,122.174c0,5.24,0,22.319,0,46.583h83.424l-9.045,74.367h-74.379 c0,114.688,0,268.375,0,268.375h-98.726c0,0,0-151.653,0-268.375h-51.443v-74.367h51.443c0-29.492,0-50.463,0-56.302 c0-27.82-2.096-41.02,9.725-62.578C205.948,28.32,239.308-0.174,297.007,0.512c57.713,0.711,82.04,6.263,82.04,6.263 l-12.501,79.257c0,0-36.853-9.731-54.942-6.263C293.539,83.238,283.122,94.366,283.122,122.174z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </a>
+
+          <!-- WhatsApp -->
+          <a
+            [href]="
+              getWhatsappLink(
+                job.title | localized : languageService.currentLang
+              )
+            "
+            target="_blank"
+            class="w-8 h-8 flex items-center border border-accent-dark justify-center rounded-md bg-primary-light/30 text-accent hover:bg-accent/50 hover:text-primary-dark transition"
+          >
+            <svg
+              class="w-6 h-6 text-accent"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M17.6 6.31999C16.8669 5.58141 15.9943 4.99596 15.033 4.59767C14.0716 4.19938 13.0406 3.99622 12 3.99999C10.6089 4.00135 9.24248 4.36819 8.03771 5.06377C6.83294 5.75935 5.83208 6.75926 5.13534 7.96335C4.4386 9.16745 4.07046 10.5335 4.06776 11.9246C4.06507 13.3158 4.42793 14.6832 5.12 15.89L4 20L8.2 18.9C9.35975 19.5452 10.6629 19.8891 11.99 19.9C14.0997 19.9001 16.124 19.0668 17.6222 17.5816C19.1205 16.0965 19.9715 14.0796 19.99 11.97C19.983 10.9173 19.7682 9.87634 19.3581 8.9068C18.948 7.93725 18.3505 7.05819 17.6 6.31999ZM12 18.53C10.8177 18.5308 9.65701 18.213 8.64 17.61L8.4 17.46L5.91 18.12L6.57 15.69L6.41 15.44C5.55925 14.0667 5.24174 12.429 5.51762 10.8372C5.7935 9.24545 6.64361 7.81015 7.9069 6.80322C9.1702 5.79628 10.7589 5.28765 12.3721 5.37368C13.9853 5.4597 15.511 6.13441 16.66 7.26999C17.916 8.49818 18.635 10.1735 18.66 11.93C18.6442 13.6859 17.9355 15.3645 16.6882 16.6006C15.441 17.8366 13.756 18.5301 12 18.53ZM15.61 13.59C15.41 13.49 14.44 13.01 14.26 12.95C14.08 12.89 13.94 12.85 13.81 13.05C13.6144 13.3181 13.404 13.5751 13.18 13.82C13.07 13.96 12.95 13.97 12.75 13.82C11.6097 13.3694 10.6597 12.5394 10.06 11.47C9.85 11.12 10.26 11.14 10.64 10.39C10.6681 10.3359 10.6827 10.2759 10.6827 10.215C10.6827 10.1541 10.6681 10.0941 10.64 10.04C10.64 9.93999 10.19 8.95999 10.03 8.56999C9.87 8.17999 9.71 8.23999 9.58 8.22999H9.19C9.08895 8.23154 8.9894 8.25465 8.898 8.29776C8.8066 8.34087 8.72546 8.403 8.66 8.47999C8.43562 8.69817 8.26061 8.96191 8.14676 9.25343C8.03291 9.54495 7.98287 9.85749 8 10.17C8.0627 10.9181 8.34443 11.6311 8.81 12.22C9.6622 13.4958 10.8301 14.5293 12.2 15.22C12.9185 15.6394 13.7535 15.8148 14.58 15.72C14.8552 15.6654 15.1159 15.5535 15.345 15.3915C15.5742 15.2296 15.7667 15.0212 15.91 14.78C16.0428 14.4856 16.0846 14.1583 16.03 13.84C15.94 13.74 15.81 13.69 15.61 13.59Z"
+                  fill="var(--color-accent)"
+                ></path>
+              </g>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a
+            [href]="getLinkedinLink()"
+            target="_blank"
+            class="w-8 h-8 flex items-center border border-accent-dark justify-center rounded-md bg-primary-light/30 text-accent hover:bg-accent/50 hover:text-primary-dark transition"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="var(--color-accent)"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 552.77 552.77"
+              xml:space="preserve"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <g>
+                    <path
+                      d="M17.95,528.854h71.861c9.914,0,17.95-8.037,17.95-17.951V196.8c0-9.915-8.036-17.95-17.95-17.95H17.95 C8.035,178.85,0,186.885,0,196.8v314.103C0,520.816,8.035,528.854,17.95,528.854z"
+                    ></path>
+                    <path
+                      d="M17.95,123.629h71.861c9.914,0,17.95-8.036,17.95-17.95V41.866c0-9.914-8.036-17.95-17.95-17.95H17.95 C8.035,23.916,0,31.952,0,41.866v63.813C0,115.593,8.035,123.629,17.95,123.629z"
+                    ></path>
+                    <path
+                      d="M525.732,215.282c-10.098-13.292-24.988-24.223-44.676-32.791c-19.688-8.562-41.42-12.846-65.197-12.846 c-48.268,0-89.168,18.421-122.699,55.27c-6.672,7.332-11.523,5.729-11.523-4.186V196.8c0-9.915-8.037-17.95-17.951-17.95h-64.192 c-9.915,0-17.95,8.035-17.95,17.95v314.103c0,9.914,8.036,17.951,17.95,17.951h71.861c9.915,0,17.95-8.037,17.95-17.951V401.666 c0-45.508,2.748-76.701,8.244-93.574c5.494-16.873,15.66-30.422,30.488-40.649c14.83-10.227,31.574-15.343,50.24-15.343 c14.572,0,27.037,3.58,37.393,10.741c10.355,7.16,17.834,17.19,22.436,30.104c4.604,12.912,6.904,41.354,6.904,85.33v132.627 c0,9.914,8.035,17.951,17.949,17.951h71.861c9.914,0,17.949-8.037,17.949-17.951V333.02c0-31.445-1.982-55.607-5.941-72.48 S535.836,228.581,525.732,215.282z"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </a>
+
+          <!-- Instagram  -->
+          <a
+            [href]="getInstagramLink('yourCompanyUsername')"
+            class="w-8 h-8 flex items-center border border-accent-dark justify-center rounded-md bg-primary-light/30 text-accent hover:bg-accent/50 hover:text-primary-dark transition"
+          >
+            <svg
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9ZM7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8Z"
+                  fill="var(--color-accent)"
+                ></path>
+              </g>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Sidebar (Recent + Featured Jobs) -->
-    <aside class="space-y-8">
-      <!-- Recent Jobs -->
-      <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">
-          {{ "features.careers.recentJobs" | translate }}
-        </h3>
-        <ul class="space-y-3">
-          <li *ngFor="let recent of jobs | slice:-5">
-            <a
-              [routerLink]="['/careers', recent.id]"
-              class="block p-3 rounded-lg hover:bg-gray-100 transition"
-            >
-              <p class="font-semibold text-gray-900">
-                {{ recent.title | localized : languageService.currentLang }}
-              </p>
-              <span class="text-sm text-gray-600">
-                {{ recent.company | localized : languageService.currentLang }}
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div class="container mx-auto px-3 sm:px-0">
 
-      <!-- Featured Jobs -->
-      <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">
-          {{ "features.careers.featuredJobs" | translate }}
+    <div
+    class="border border-gray-300 shadow rounded-2xl p-6 md:p-10  max-w-4xl mx-auto mt-6  md:mt-10"
+    >
+    <div class="flex gap-2 items-center mb-4">
+      <svg
+      class="w-6"
+      fill="#145c53"
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 297 297"
+      xml:space="preserve"
+      >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+          <g>
+            <g>
+              <path
+                d="M276.354,215.56h-25.516l-22.562-22.562c2.91-4.938,4.163-10.739,3.466-16.518c-1.564-12.969-2.813-22.582-3.71-28.573 c-2.718-18.133-16.647-32.894-35.485-37.604l-14.834-3.708c-1.96-1.904-2.289-8.161-1.751-11.493 c2.381-2.294,4.691-4.876,6.752-7.754c8.026-11.21,12.628-25.494,12.628-39.187c0-27.51-19.214-46.724-46.724-46.724 s-46.724,19.214-46.724,46.724c0,13.693,4.603,27.977,12.628,39.187c2.06,2.875,4.371,5.456,6.75,7.75 c0.54,3.33,0.213,9.591-1.749,11.496l-14.835,3.708c-18.837,4.71-32.766,19.471-35.484,37.604 c-0.901,6.013-2.15,15.626-3.711,28.573c-0.69,5.721,0.53,11.465,3.378,16.371l-22.709,22.709H20.646 C9.262,215.559,0,224.82,0,236.206v23.196c0,11.385,9.262,20.646,20.646,20.646h54.23c11.385,0,20.646-9.262,20.646-20.646 v-23.196c0-11.385-9.262-20.646-20.646-20.646h-0.524l10.496-10.496c2.192,0.585,4.47,0.892,6.781,0.892h47.022v25.12h-17.266 c-11.385,0-20.646,9.262-20.646,20.646v23.196c0,11.385,9.262,20.646,20.646,20.646h54.23c11.385,0,20.646-9.262,20.646-20.646 v-23.196c0-11.385-9.262-20.646-20.646-20.646h-17.031v-25.12h47.022c2.245,0,4.457-0.293,6.592-0.846l10.45,10.45h-0.524 c-11.385,0-20.646,9.262-20.646,20.646v23.196c0,11.385,9.262,20.646,20.646,20.646h54.23c11.385,0,20.646-9.262,20.646-20.646 v-23.196C297,224.82,287.738,215.56,276.354,215.56z M74.876,233.498c1.492,0,2.707,1.215,2.707,2.707v23.196 c0,1.492-1.215,2.707-2.707,2.707h-54.23c-1.492,0-2.707-1.215-2.707-2.707v-23.196c0-1.492,1.215-2.707,2.707-2.707H74.876z M148.618,21.367c12.952,0,26.791,7.038,26.791,26.791c0,19.339-13.521,39.043-26.791,39.043 c-13.27,0-26.791-19.704-26.791-39.043C121.827,28.406,135.666,21.367,148.618,21.367z M161.256,117.952 c-0.661,6.39-6.076,11.389-12.638,11.389c-6.562,0-11.977-5-12.638-11.389c2.684-3.671,4.106-7.842,4.818-11.749 c2.578,0.605,5.192,0.932,7.82,0.932c2.627,0,5.242-0.328,7.82-0.932C157.15,110.109,158.571,114.281,161.256,117.952z M175.614,249.015c1.493,0,2.707,1.215,2.707,2.707v23.196c0,1.492-1.215,2.707-2.707,2.707h-54.23 c-1.492,0-2.707-1.215-2.707-2.707v-23.196c0-1.492,1.215-2.707,2.707-2.707H175.614z M210.389,183.872 c-0.712,0.803-2.281,2.151-4.784,2.151H91.629c-2.503,0-4.072-1.348-4.785-2.151c-0.712-0.804-1.862-2.522-1.563-5.007 c1.517-12.578,2.775-22.262,3.635-28.004c1.497-9.986,9.778-18.514,20.605-21.222l8.342-2.085 c4.502,12.643,16.586,21.72,30.754,21.72c14.168,0,26.252-9.078,30.754-21.72l8.341,2.085 c10.829,2.708,19.109,11.236,20.606,21.222c0.857,5.721,2.114,15.404,3.634,28.004 C212.251,181.349,211.101,183.068,210.389,183.872z M279.06,259.401c0,1.492-1.215,2.707-2.707,2.707h-54.23 c-1.492,0-2.707-1.215-2.707-2.707v-23.196c0-1.492,1.215-2.707,2.707-2.707h54.23c1.492,0,2.707,1.215,2.707,2.707V259.401z"
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+        
+        <h3 class="text-lg font-semibold">
+          {{ "features.careers.responsibilities" | translate }}
         </h3>
-        <ul class="space-y-3">
-          <li *ngFor="let featured of jobs | slice:0:2">
-            <a
-              [routerLink]="['/careers', featured.id]"
-              class="block p-3 rounded-lg hover:bg-gray-100 transition"
-            >
-              <p class="font-semibold text-gray-900">
-                {{ featured.title | localized : languageService.currentLang }}
-              </p>
-              <span class="text-sm text-gray-600">
-                {{ featured.company | localized : languageService.currentLang }}
-              </span>
-            </a>
-          </li>
-        </ul>
       </div>
-    </aside>
+      <ul class="list-disc list-inside space-y-2 text-gray-600 mb-6 pl-8">
+        <li
+        *ngFor="let item of job.responsibilities"
+        class="flex gap-2 items-start"
+        >
+        <img
+        src="icons/careers/check-list.svg"
+          alt="check-icon"
+          class="w-5 0"
+          />
+          {{ item | localized : languageService.currentLang }}
+        </li>
+      </ul>
+      
+      <!-- Qualifications -->
+      <div class="flex gap-2 items-center mb-4">
+        <svg
+        class="w-6"
+        viewBox="0 -8.14 62.451 62.451"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+        >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <g
+          id="Group_35"
+          data-name="Group 35"
+          transform="translate(-782.964 -1356.609)"
+          >
+            <path
+            id="Path_92"
+            data-name="Path 92"
+            d="M798.022,1369.359v23.226h.034c.353,4.555,7.685,8.2,16.7,8.2s16.347-3.641,16.7-8.2h.033v-23.226Z"
+            fill="#ffffff"
+            stroke="#145c53"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="4"
+            ></path>
+            <path
+            id="Path_93"
+            data-name="Path 93"
+            d="M843.415,1373.207l-29.225,14.6-29.227-14.6,29.227-14.6Z"
+            fill="#ffffff"
+            stroke="#145c53"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="4"
+            ></path>
+            <line
+            id="Line_40"
+            data-name="Line 40"
+            y1="19.235"
+            transform="translate(784.964 1374.361)"
+            fill="#ffffff"
+            stroke="#145c53"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="4"
+            ></line>
+          </g>
+        </g>
+      </svg>
+      <h3 class="text-lg font-semibold">
+        {{ "features.careers.qualifications" | translate }}
+      </h3>
+    </div>
+    <ul class="list-disc list-inside space-y-2 text-gray-600 mb-6 pl-8">
+      <li
+        *ngFor="let item of job.qualifications"
+        class="flex gap-2 items-start"
+        >
+        <img
+        src="icons/careers/check-list.svg"
+        alt="check-icon"
+        class="w-5 0"
+        />
+        
+        {{ item | localized : languageService.currentLang }}
+      </li>
+    </ul>
+    
+    <!-- Skills -->
+    <div class="flex gap-2 items-center mb-4">
+      <svg
+      class="w-6"
+      fill="#145c53"
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 485 485"
+      xml:space="preserve"
+      >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <g>
+            <path
+              d="M15.951,319.573h18.598V485h138.641V319.573h18.599V121.03H15.951V319.573z M45.951,151.03h42.918v93.542h30V151.03h42.919 v138.542h-18.599V455H64.549V289.573H45.951V151.03z"
+              ></path>
+              <path
+              d="M103.869,100.989c27.843,0,50.494-22.652,50.494-50.494S131.712,0,103.869,0S53.375,22.652,53.375,50.494 S76.026,100.989,103.869,100.989z M103.869,30c11.301,0,20.494,9.194,20.494,20.494s-9.193,20.494-20.494,20.494 s-20.494-9.194-20.494-20.494S92.568,30,103.869,30z"
+              ></path>
+            <path
+              d="M419.147,99.803c27.516,0,49.901-22.386,49.901-49.901C469.049,22.386,446.663,0,419.147,0s-49.901,22.386-49.901,49.902 C369.246,77.417,391.632,99.803,419.147,99.803z M419.147,30c10.974,0,19.901,8.928,19.901,19.902 c0,10.974-8.928,19.901-19.901,19.901s-19.901-8.928-19.901-19.901C399.246,38.928,408.174,30,419.147,30z"
+              ></path>
+              <path
+              d="M419.147,385.197c-27.516,0-49.901,22.386-49.901,49.901c0,27.516,22.386,49.902,49.901,49.902 s49.901-22.386,49.901-49.902C469.049,407.583,446.663,385.197,419.147,385.197z M419.147,455 c-10.974,0-19.901-8.928-19.901-19.902c0-10.974,8.928-19.901,19.901-19.901s19.901,8.928,19.901,19.901 C439.049,446.072,430.121,455,419.147,455z"
+              ></path>
+              <path
+              d="M419.147,256.798c-27.516,0-49.901,22.386-49.901,49.901c0,27.516,22.386,49.902,49.901,49.902 s49.901-22.386,49.901-49.902C469.049,279.184,446.663,256.798,419.147,256.798z M419.147,326.601 c-10.974,0-19.901-8.928-19.901-19.902c0-10.974,8.928-19.901,19.901-19.901s19.901,8.928,19.901,19.901 C439.049,317.673,430.121,326.601,419.147,326.601z"
+              ></path>
+              <path
+              d="M419.147,128.399c-27.516,0-49.901,22.386-49.901,49.902c0,27.516,22.386,49.901,49.901,49.901 s49.901-22.386,49.901-49.901C469.049,150.785,446.663,128.399,419.147,128.399z M419.147,198.202 c-10.974,0-19.901-8.928-19.901-19.901c0-10.974,8.928-19.902,19.901-19.902s19.901,8.928,19.901,19.902 C439.049,189.274,430.121,198.202,419.147,198.202z"
+              ></path>
+              <polygon
+              points="266.517,227.5 226.787,227.5 226.787,257.5 266.517,257.5 266.517,450.098 336.246,450.098 336.246,420.098 296.517,420.098 296.517,321.699 336.246,321.699 336.246,291.699 296.517,291.699 296.517,193.301 336.246,193.301 336.246,163.301 296.517,163.301 296.517,64.902 336.246,64.902 336.246,34.902 266.517,34.902 "
+              ></polygon>
+            </g>
+          </g>
+        </svg>
+        <h3 class="text-lg font-semibold">
+          {{ "features.careers.skills" | translate }}
+        </h3>
+      </div>
+      <ul class="list-disc list-inside space-y-2 text-gray-600 mb-6 pl-8">
+        <li *ngFor="let skill of job.skills" class="flex gap-2 items-start">
+          <img
+          src="icons/careers/check-list.svg"
+          alt="check-icon"
+          class="w-5 0"
+          />
+          
+          {{ skill | localized : languageService.currentLang }}
+        </li>
+      </ul>
+      
+      <!-- Gender -->
+      <div class="flex items-center mb-6">
+        <svg
+        class="w-6"
+        version="1.1"
+        id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 32 32"
+        xml:space="preserve"
+        fill="#145c53"
+        stroke="#145c53"
+        >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <circle
+          style="
+          fill: none;
+          stroke: #145c53;
+          stroke-width: 2;
+          stroke-miterlimit: 10;
+          "
+          cx="16"
+          cy="12"
+          r="6"
+          ></circle>
+          <path
+          style="
+          fill: none;
+          stroke: #145c53;
+          stroke-width: 2;
+          stroke-miterlimit: 10;
+          "
+          d="M7,27c0-4.971,4.029-9,9-9s9,4.029,9,9"
+          ></path>
+        </g>
+      </svg>
+      <p class="text-gray-700">
+        <span class="font-semibold">
+          {{ "features.careers.gender" | translate }}:
+        </span>
+        {{ job.gender | localized : languageService.currentLang }}
+      </p>
+    </div>
+    
+    <!-- Buttons -->
+    <div class="flex gap-4 flex-wrap">
+      <button
+      class="px-8 py-3 rounded-xl bg-primary-light text-white font-medium shadow-md hover:bg-primary transition flex items-center gap-2"
+      (click)="router.navigate(['/apply', job.id])"
+      >
+      <svg
+      class="w-5 h-5"
+      viewBox="0 0 24 24"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      fill="#000000"
+      >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <title></title>
+        <g
+              fill="none"
+              fill-rule="evenodd"
+              id="页面-1"
+              stroke="none"
+              stroke-linecap="round"
+              stroke-width="1"
+              >
+              <g
+              id="导航图标"
+              stroke="#fff"
+              stroke-width="1.5"
+              transform="translate(-103.000000, -334.000000)"
+              >
+              <g id="申请" transform="translate(103.000000, 334.000000)">
+                <g id="路径" transform="translate(4.000000, 2.000000)">
+                    <path
+                    d="M16,14.5 L16,19 C16,19.5523 15.5523,20 15,20 L11.75,20"
+                    stroke-linejoin="round"
+                    ></path>
+                    <path
+                    d="M16,6 L16,1 C16,0.447715 15.5523,0 15,0 L1,0 C0.447715,0 0,0.447715 0,1 L0,19 C0,19.5523 0.447715,20 1,20 L4,20"
+                    stroke-linejoin="round"
+                    ></path>
+                    <line x1="4" x2="11" y1="6" y2="6"></line>
+                    <line x1="7.5" x2="16" y1="20" y2="9.5"></line>
+                    <line x1="4" x2="8" y1="10" y2="10"></line>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+        
+        {{ "features.careers.applyNow" | translate }}
+      </button>
+    </div>
   </div>
+  
+  <div
+  class="border border-gray-300 shadow rounded-2xl p-6 md:p-10 max-w-4xl mx-auto mt-4 lg:mt-6 z-40"
+  >
+  <!-- Logo   -->
+  <div class="flex items-center gap-4 mb-6">
+    <img
+    [src]="job.logo"
+    [alt]="job.company | localized : languageService.currentLang"
+    class="w-16 h-16 rounded-xl border shadow-sm object-cover"
+    />
+    <div>
+      <p class="text-primary font-medium">
+        {{ job.company | localized : languageService.currentLang }}
+        ·
+        <span class="text-gray-600 font-normal">
+          {{ job.location | localized : languageService.currentLang }}
+        </span>
+      </p>
+    </div>
+  </div>
+  <p class="text-gray-700">
+    {{ job.companyDescription | localized : languageService.currentLang }}
+  </p>
+</div>
+</div>
+
 </div>
